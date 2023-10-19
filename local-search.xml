@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>尚医通学习day01</title>
+    <link href="/2023/10/19/%E5%B0%9A%E5%8C%BB%E9%80%9A%E5%AD%A6%E4%B9%A001/"/>
+    <url>/2023/10/19/%E5%B0%9A%E5%8C%BB%E9%80%9A%E5%AD%A6%E4%B9%A001/</url>
+    
+    <content type="html"><![CDATA[<p>前言：学习过程并不严格按照视频每一天的进度划分，重点掌握一些技术，以后端接口开发为核心，前端能看懂就行了</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目</category>
+      
+      <category>尚医通</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>项目</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Java多线程-ThreadLocal</title>
     <link href="/2023/07/22/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-ThreadLocal/"/>
     <url>/2023/07/22/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-ThreadLocal/</url>

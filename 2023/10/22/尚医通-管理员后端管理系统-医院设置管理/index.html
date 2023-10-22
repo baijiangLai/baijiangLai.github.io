@@ -1,0 +1,1497 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.png">
+  <link rel="icon" href="/img/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 医院设置管理1.1. 医院列表1.1.1 相关数据库 1.1.2. 对应模块Service-hosp 1.1.3. 对应实体类12345678910111213141516171819202122232425@Datapublic class BaseEntity implements Serializable &amp;#123;    @ApiModelProperty(value &#x3D; &amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="尚医通-管理员后端管理系统-医院设置管理">
+<meta property="og:url" content="http://example.com/2023/10/22/%E5%B0%9A%E5%8C%BB%E9%80%9A-%E7%AE%A1%E7%90%86%E5%91%98%E5%90%8E%E7%AB%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-%E5%8C%BB%E9%99%A2%E8%AE%BE%E7%BD%AE%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Lai">
+<meta property="og:description" content="1. 医院设置管理1.1. 医院列表1.1.1 相关数据库 1.1.2. 对应模块Service-hosp 1.1.3. 对应实体类12345678910111213141516171819202122232425@Datapublic class BaseEntity implements Serializable &amp;#123;    @ApiModelProperty(value &#x3D; &amp;quo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/%E5%B0%9A%E5%8C%BB%E9%80%9A/hosp.png">
+<meta property="article:published_time" content="2023-10-22T14:04:03.000Z">
+<meta property="article:modified_time" content="2023-10-22T14:05:39.892Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="项目">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/%E5%B0%9A%E5%8C%BB%E9%80%9A/hosp.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>尚医通-管理员后端管理系统-医院设置管理 - Lai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Lai</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="尚医通-管理员后端管理系统-医院设置管理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-22 22:04" pubdate>
+          2023年10月22日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">尚医通-管理员后端管理系统-医院设置管理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-医院设置管理"><a href="#1-医院设置管理" class="headerlink" title="1. 医院设置管理"></a>1. 医院设置管理</h1><h2 id="1-1-医院列表"><a href="#1-1-医院列表" class="headerlink" title="1.1. 医院列表"></a>1.1. 医院列表</h2><h3 id="1-1-1-相关数据库"><a href="#1-1-1-相关数据库" class="headerlink" title="1.1.1 相关数据库"></a>1.1.1 相关数据库</h3><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/project/hospital_set.png" srcset="/img/loading.gif" lazyload alt="hospital_set"></p>
+<h3 id="1-1-2-对应模块"><a href="#1-1-2-对应模块" class="headerlink" title="1.1.2. 对应模块"></a>1.1.2. 对应模块</h3><p>Service-hosp</p>
+<h3 id="1-1-3-对应实体类"><a href="#1-1-3-对应实体类" class="headerlink" title="1.1.3. 对应实体类"></a>1.1.3. 对应实体类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BaseEntity</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br><br>    <span class="hljs-meta">@ApiModelProperty(value = &quot;id&quot;)</span><br>    <span class="hljs-meta">@TableId(type = IdType.AUTO)</span><br>    <span class="hljs-keyword">private</span> Long id;<br><br>    <span class="hljs-meta">@ApiModelProperty(value = &quot;创建时间&quot;)</span><br>    <span class="hljs-meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br>    <span class="hljs-meta">@TableField(&quot;create_time&quot;)</span><br>    <span class="hljs-keyword">private</span> Date createTime;<br><br>    <span class="hljs-meta">@ApiModelProperty(value = &quot;更新时间&quot;)</span><br>    <span class="hljs-meta">@TableField(&quot;update_time&quot;)</span><br>    <span class="hljs-keyword">private</span> Date updateTime;<br><br>    <span class="hljs-meta">@ApiModelProperty(value = &quot;逻辑删除(1:已删除，0:未删除)&quot;)</span><br>    <span class="hljs-meta">@TableLogic</span><br>    <span class="hljs-meta">@TableField(&quot;is_deleted&quot;)</span><br>    <span class="hljs-keyword">private</span> Integer isDeleted;<br><br>    <span class="hljs-meta">@ApiModelProperty(value = &quot;其他参数&quot;)</span><br>    <span class="hljs-meta">@TableField(exist = false)</span><br>    <span class="hljs-keyword">private</span> Map&lt;String,Object&gt; param = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@ApiModel(description = &quot;医院设置&quot;)</span><br><span class="hljs-meta">@TableName(&quot;hospital_set&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HospitalSet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BaseEntity</span> &#123;<br>	<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;医院名称&quot;)</span><br>	<span class="hljs-meta">@TableField(&quot;hosname&quot;)</span><br>	<span class="hljs-keyword">private</span> String hosname;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;医院编号&quot;)</span><br>	<span class="hljs-meta">@TableField(&quot;hoscode&quot;)</span><br>	<span class="hljs-keyword">private</span> String hoscode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;api基础路径&quot;)</span><br>	<span class="hljs-meta">@TableField(&quot;api_url&quot;)</span><br>	<span class="hljs-keyword">private</span> String apiUrl;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;签名秘钥&quot;)</span><br>	<span class="hljs-meta">@TableField(&quot;sign_key&quot;)</span><br>	<span class="hljs-keyword">private</span> String signKey;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;联系人姓名&quot;)</span><br>	<span class="hljs-meta">@TableField(&quot;contacts_name&quot;)</span><br>	<span class="hljs-keyword">private</span> String contactsName;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;联系人手机&quot;)</span><br>	<span class="hljs-meta">@TableField(&quot;contacts_phone&quot;)</span><br>	<span class="hljs-keyword">private</span> String contactsPhone;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;状态(0:不可用, 1:可用)&quot;)</span><br>	<span class="hljs-meta">@TableField(&quot;status&quot;)</span><br>	<span class="hljs-keyword">private</span> Integer status;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-1-4-进行增删改查操作"><a href="#1-1-4-进行增删改查操作" class="headerlink" title="1.1.4. 进行增删改查操作"></a>1.1.4. 进行增删改查操作</h3><p>创建对应的mapper、service，根据数据库表字段进行相关操作</p>
+<h2 id="1-2-医院、科室、排班设置"><a href="#1-2-医院、科室、排班设置" class="headerlink" title="1.2. 医院、科室、排班设置"></a>1.2. 医院、科室、排班设置</h2><h3 id="1-2-1-相关数据库"><a href="#1-2-1-相关数据库" class="headerlink" title="1.2.1. 相关数据库"></a>1.2.1. 相关数据库</h3><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/project/hospital_set.png" srcset="/img/loading.gif" lazyload alt="hospital"></p>
+<p>使用MongoDB保存医院、科室、排班数据，同时给出了一个模拟的医院系统（hospital_manage），统一的调用接口在api&#x2F;ApiController中。</p>
+<h3 id="1-2-2-医院相关CRUD"><a href="#1-2-2-医院相关CRUD" class="headerlink" title="1.2.2. 医院相关CRUD"></a>1.2.2. 医院相关CRUD</h3><p>所有的接口文档均在《尚医通API接口文档》</p>
+<h4 id="1-2-2-1-上传医院接口"><a href="#1-2-2-1-上传医院接口" class="headerlink" title="1.2.2.1 上传医院接口"></a>1.2.2.1 上传医院接口</h4><p>接口路径：&#x2F;api&#x2F;hosp&#x2F;saveHospital</p>
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>必输</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hoscode</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>给医院分配的唯一标识</td>
+</tr>
+<tr>
+<td>hosname</td>
+<td>string</td>
+<td>50</td>
+<td>是</td>
+<td>医院名称</td>
+</tr>
+<tr>
+<td>hostype</td>
+<td>string</td>
+<td>1</td>
+<td>是</td>
+<td>医院类型(1:三级甲等,2:三级乙等,3:二级甲等,4:二级乙等,5:一级)</td>
+</tr>
+<tr>
+<td>provinceCode</td>
+<td>string</td>
+<td>18</td>
+<td>是</td>
+<td>省code（国家统计局对应省的code）</td>
+</tr>
+<tr>
+<td>cityCode</td>
+<td>string</td>
+<td>50</td>
+<td>是</td>
+<td>市code（国家统计局对应市的code）</td>
+</tr>
+<tr>
+<td>districtCode</td>
+<td>string</td>
+<td>10</td>
+<td>是</td>
+<td>区code（国家统计局对应区的code）</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>20</td>
+<td>是</td>
+<td>详情地址</td>
+</tr>
+<tr>
+<td>logoData</td>
+<td>string</td>
+<td>11</td>
+<td>是</td>
+<td>医院logo(转换为base64字符串)</td>
+</tr>
+<tr>
+<td>intro</td>
+<td>string</td>
+<td></td>
+<td>是</td>
+<td>医院简介</td>
+</tr>
+<tr>
+<td>route</td>
+<td>string</td>
+<td>255</td>
+<td>是</td>
+<td>坐车路线</td>
+</tr>
+<tr>
+<td>bookingRule</td>
+<td>string</td>
+<td>8000</td>
+<td>是</td>
+<td>预约规则，json数据</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>步骤:</p>
+<ol>
+<li>获取传递的医院信息，通过request获取到封装的map</li>
+<li>获取医院系统传递过来的签名,签名进行MD5加密</li>
+<li>根据传递过来医院编码，查询数据库，查询签名<ol>
+<li>此时得到医院的hoscode，去hospital_set表中根据hoscode得到signKey</li>
+<li>将查询到的signKey进行MD5加密。</li>
+</ol>
+</li>
+<li>判断参数中传入的签名和数据库中得到的签名加密之后是否一致<ol>
+<li>签名不一致直接爆出异常</li>
+</ol>
+</li>
+<li>图片处理：在医院接口中，原来的”+”转变为了” “，因此在得到参数之后，需要转换回去。</li>
+<li>根据hoscode判断是否存在相同数据<ol>
+<li>存在，进行修改</li>
+<li>不存在，进行保存</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h4 id="1-2-2-2-查询医院接口"><a href="#1-2-2-2-查询医院接口" class="headerlink" title="1.2.2.2. 查询医院接口"></a>1.2.2.2. 查询医院接口</h4><p>地址：&#x2F;api&#x2F;hosp&#x2F;hospital&#x2F;show</p>
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>必输</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hoscode</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>给医院分配的唯一标识</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td></td>
+<td>是</td>
+<td>时间戳。从1970-01-01 00:00:00算起的毫秒数</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>验签参数。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>得到请求过来的map</li>
+<li>从map中获取医院的编号</li>
+<li>获取医院系统传递过来的签名,签名进行MD5加密</li>
+<li>根据传递过来医院编码，查询数据库，查询签名<ol>
+<li>此时得到医院的hoscode，去hospital_set表中根据hoscode得到signKey</li>
+<li>将查询到的signKey进行MD5加密。</li>
+</ol>
+</li>
+<li>判断参数中传入的签名和数据库中得到的签名加密之后是否一致<ol>
+<li>签名不一致直接爆出异常</li>
+</ol>
+</li>
+<li>根据医院编号(hoscode)进行查询</li>
+</ol>
+</blockquote>
+<h3 id="1-2-3-科室相关CRUD"><a href="#1-2-3-科室相关CRUD" class="headerlink" title="1.2.3. 科室相关CRUD"></a>1.2.3. 科室相关CRUD</h3><h4 id="1-2-3-1-上传科室接口"><a href="#1-2-3-1-上传科室接口" class="headerlink" title="1.2.3.1. 上传科室接口"></a>1.2.3.1. 上传科室接口</h4><p>地址：&#x2F;api&#x2F;hosp&#x2F;saveDepartment</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>必输</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hoscode</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>给医院分配的唯一标识</td>
+</tr>
+<tr>
+<td>depcode</td>
+<td>string</td>
+<td>50</td>
+<td>是</td>
+<td>科室编号</td>
+</tr>
+<tr>
+<td>depname</td>
+<td>string</td>
+<td>1</td>
+<td>是</td>
+<td>科室名称</td>
+</tr>
+<tr>
+<td>intro</td>
+<td>string</td>
+<td>18</td>
+<td>是</td>
+<td>科室描述</td>
+</tr>
+<tr>
+<td>bigcode</td>
+<td>string</td>
+<td>50</td>
+<td>是</td>
+<td>大科室编号</td>
+</tr>
+<tr>
+<td>bigname</td>
+<td>string</td>
+<td>10</td>
+<td>是</td>
+<td>大科室名称</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>20</td>
+<td>是</td>
+<td>详情地址</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td></td>
+<td>是</td>
+<td>时间戳。从1970-01-01 00:00:00算起的毫秒数</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>验签参数。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>从request中获取传递的map</li>
+<li>从map中获取医院的编号</li>
+<li>获取医院系统传递过来的签名,签名进行MD5加密</li>
+<li>根据传递过来医院编码，查询数据库，查询签名<ol>
+<li>此时得到医院的hoscode，去hospital_set表中根据hoscode得到signKey</li>
+<li>将查询到的signKey进行MD5加密。</li>
+</ol>
+</li>
+<li>判断参数中传入的签名和数据库中得到的签名加密之后是否一致<ol>
+<li>签名不一致直接爆出异常</li>
+</ol>
+</li>
+<li>根据医院编号和科室号到mongodb中进行查询<ol>
+<li>如果查询出来有，更新相关值</li>
+<li>如果查询出来没有，设置相关值，并进行保存</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h4 id="1-2-3-2-查询科室接口"><a href="#1-2-3-2-查询科室接口" class="headerlink" title="1.2.3.2. 查询科室接口"></a>1.2.3.2. 查询科室接口</h4><p>地址：&#x2F;api&#x2F;hosp&#x2F;hospital&#x2F;show</p>
+<p>用于查询，所以涉及到一个vo实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@ApiModel(description = &quot;Department&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DepartmentQueryVo</span> &#123;<br>	<br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;医院编号&quot;)</span><br>	<span class="hljs-keyword">private</span> String hoscode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;科室编号&quot;)</span><br>	<span class="hljs-keyword">private</span> String depcode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;科室名称&quot;)</span><br>	<span class="hljs-keyword">private</span> String depname;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;大科室编号&quot;)</span><br>	<span class="hljs-keyword">private</span> String bigcode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;大科室名称&quot;)</span><br>	<span class="hljs-keyword">private</span> String bigname;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>必输</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hoscode</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>给医院分配的唯一标识</td>
+</tr>
+<tr>
+<td><code>pageNum</code></td>
+<td>Int</td>
+<td></td>
+<td>是</td>
+<td>第几页</td>
+</tr>
+<tr>
+<td><code>pageSize</code></td>
+<td>Int</td>
+<td></td>
+<td>是</td>
+<td>每页个数</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td></td>
+<td>是</td>
+<td>时间戳。从1970-01-01 00:00:00算起的毫秒数</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>验签参数。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>从request中获取传递的map</li>
+<li>从map中获取医院的编号</li>
+<li>获取医院系统传递过来的签名,签名进行MD5加密</li>
+<li>根据传递过来医院编码，查询数据库，查询签名<ol>
+<li>此时得到医院的hoscode，去hospital_set表中根据hoscode得到signKey</li>
+<li>将查询到的signKey进行MD5加密。</li>
+</ol>
+</li>
+<li>判断参数中传入的签名和数据库中得到的签名加密之后是否一致<ol>
+<li>签名不一致直接爆出异常</li>
+</ol>
+</li>
+<li>从map中查询出来page、limit，没有默认为1。</li>
+<li>封装DepartmentQueryVo对象，即设置hoscode</li>
+<li>从MongoDB中进行分页查找，根据相关条件。</li>
+</ol>
+</blockquote>
+<h4 id="1-2-3-3-删除科室接口"><a href="#1-2-3-3-删除科室接口" class="headerlink" title="1.2.3.3. 删除科室接口"></a>1.2.3.3. 删除科室接口</h4><p>地址：&#x2F;api&#x2F;hosp&#x2F;schedule&#x2F;remove</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>必输</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hoscode</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>给医院分配的唯一标识</td>
+</tr>
+<tr>
+<td>hosScheduleId</td>
+<td>string</td>
+<td>30</td>
+<td></td>
+<td>排班编号（医院自己的排班主键）</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td></td>
+<td>是</td>
+<td>时间戳。从1970-01-01 00:00:00算起的毫秒数</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>验签参数。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>从request中获取传递的map</li>
+<li>从map中获取医院的编号</li>
+<li>获取医院系统传递过来的签名,签名进行MD5加密</li>
+<li>根据传递过来医院编码，查询数据库，查询签名<ol>
+<li>此时得到医院的hoscode，去hospital_set表中根据hoscode得到signKey</li>
+<li>将查询到的signKey进行MD5加密。</li>
+</ol>
+</li>
+<li>判断参数中传入的签名和数据库中得到的签名加密之后是否一致<ol>
+<li>签名不一致直接爆出异常</li>
+</ol>
+</li>
+<li>从map中获取科室编号</li>
+<li>根据医院编号和科室编号查询出科室对象<ol>
+<li>如果查询出有，根据科室的id进行删除</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h3 id="1-2-4-排班相关CRUD"><a href="#1-2-4-排班相关CRUD" class="headerlink" title="1.2.4. 排班相关CRUD"></a>1.2.4. 排班相关CRUD</h3><h4 id="1-2-4-1-上传排班"><a href="#1-2-4-1-上传排班" class="headerlink" title="1.2.4.1. 上传排班"></a>1.2.4.1. 上传排班</h4><p>地址：&#x2F;api&#x2F;hosp&#x2F;saveSchedule</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>必输</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hoscode</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>给医院分配的唯一标识</td>
+</tr>
+<tr>
+<td>depcode</td>
+<td>string</td>
+<td>20</td>
+<td>是</td>
+<td>科室编号</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>职称</td>
+</tr>
+<tr>
+<td>docname</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>医生名称</td>
+</tr>
+<tr>
+<td>skill</td>
+<td>string</td>
+<td>300</td>
+<td>是</td>
+<td>擅长技能</td>
+</tr>
+<tr>
+<td>workDate</td>
+<td>string</td>
+<td>10</td>
+<td>是</td>
+<td>安排日期（yyyy-MM-dd）</td>
+</tr>
+<tr>
+<td>workTime</td>
+<td>int</td>
+<td></td>
+<td>是</td>
+<td>安排时间（0：上午 1：下午）</td>
+</tr>
+<tr>
+<td>reservedNumber</td>
+<td>int</td>
+<td></td>
+<td></td>
+<td>可预约数</td>
+</tr>
+<tr>
+<td>availableNumber</td>
+<td>int</td>
+<td></td>
+<td></td>
+<td>剩余预约数</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>5</td>
+<td></td>
+<td>挂号费</td>
+</tr>
+<tr>
+<td>status</td>
+<td>int</td>
+<td></td>
+<td></td>
+<td>排班状态（-1：停诊 0：停约 1：可约）</td>
+</tr>
+<tr>
+<td>hosScheduleId</td>
+<td>string</td>
+<td>30</td>
+<td></td>
+<td>排班编号（医院自己的排班主键）</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td></td>
+<td>是</td>
+<td>时间戳。从1970-01-01 00:00:00算起的毫秒数</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>验签参数。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>从request中获取传递的map</li>
+<li>从map中获取医院的编号</li>
+<li>获取医院系统传递过来的签名,签名进行MD5加密</li>
+<li>根据传递过来医院编码，查询数据库，查询签名<ol>
+<li>此时得到医院的hoscode，去hospital_set表中根据hoscode得到signKey</li>
+<li>将查询到的signKey进行MD5加密。</li>
+</ol>
+</li>
+<li>判断参数中传入的签名和数据库中得到的签名加密之后是否一致<ol>
+<li>签名不一致直接爆出异常</li>
+</ol>
+</li>
+<li>根据医院编号和排班编号(ScheduleId)查询是否有这一条数据<ol>
+<li>如果有：更新相关值</li>
+<li>如果没有，设置相关值，并进行保存</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h4 id="1-2-4-2-查询排班"><a href="#1-2-4-2-查询排班" class="headerlink" title="1.2.4.2. 查询排班"></a>1.2.4.2. 查询排班</h4><p>地址：&#x2F;api&#x2F;hosp&#x2F;schedule&#x2F;list</p>
+<p>查询涉及到实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@ApiModel(description = &quot;Schedule&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ScheduleQueryVo</span> &#123;<br>	<br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;医院编号&quot;)</span><br>	<span class="hljs-keyword">private</span> String hoscode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;科室编号&quot;)</span><br>	<span class="hljs-keyword">private</span> String depcode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;医生编号&quot;)</span><br>	<span class="hljs-keyword">private</span> String doccode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;安排日期&quot;)</span><br>	<span class="hljs-keyword">private</span> Date workDate;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;安排时间（0：上午 1：下午）&quot;)</span><br>	<span class="hljs-keyword">private</span> Integer workTime;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>必输</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hoscode</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>给医院分配的唯一标识</td>
+</tr>
+<tr>
+<td><code>pageNum</code></td>
+<td>Int</td>
+<td></td>
+<td>是</td>
+<td>第几页</td>
+</tr>
+<tr>
+<td><code>pageSize</code></td>
+<td>Int</td>
+<td></td>
+<td>是</td>
+<td>每页个数</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td></td>
+<td>是</td>
+<td>时间戳。从1970-01-01 00:00:00算起的毫秒数</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>验签参数。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>从request中获取传递的map</li>
+<li>从map中获取医院的编号</li>
+<li>获取医院系统传递过来的签名,签名进行MD5加密</li>
+<li>根据传递过来医院编码，查询数据库，查询签名<ol>
+<li>此时得到医院的hoscode，去hospital_set表中根据hoscode得到signKey</li>
+<li>将查询到的signKey进行MD5加密。</li>
+</ol>
+</li>
+<li>判断参数中传入的签名和数据库中得到的签名加密之后是否一致<ol>
+<li>签名不一致直接爆出异常</li>
+</ol>
+</li>
+<li>从map中查询出来page、limit，没有默认为1。同时获取科室编号。</li>
+<li>封装ScheduleQueryVo对象，即设置hoscode</li>
+<li>从MongoDB中进行分页查找，根据相关条件。</li>
+</ol>
+</blockquote>
+<h4 id="1-2-4-3-删除排班"><a href="#1-2-4-3-删除排班" class="headerlink" title="1.2.4.3. 删除排班"></a>1.2.4.3. 删除排班</h4><p>地址：&#x2F;api&#x2F;hosp&#x2F;schedule&#x2F;remove</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>长度</strong></th>
+<th><strong>必输</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hoscode</td>
+<td>string</td>
+<td>30</td>
+<td>是</td>
+<td>给医院分配的唯一标识</td>
+</tr>
+<tr>
+<td>hosScheduleId</td>
+<td>string</td>
+<td>30</td>
+<td></td>
+<td>排班编号（医院自己的排班主键）</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td></td>
+<td>是</td>
+<td>时间戳。从1970-01-01 00:00:00算起的毫秒数</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>string</td>
+<td>32</td>
+<td>是</td>
+<td>验签参数。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>从request中获取传递的map</li>
+<li>从map中获取医院的编号</li>
+<li>获取医院系统传递过来的签名,签名进行MD5加密</li>
+<li>根据传递过来医院编码，查询数据库，查询签名<ol>
+<li>此时得到医院的hoscode，去hospital_set表中根据hoscode得到signKey</li>
+<li>将查询到的signKey进行MD5加密。</li>
+</ol>
+</li>
+<li>判断参数中传入的签名和数据库中得到的签名加密之后是否一致<ol>
+<li>签名不一致直接爆出异常</li>
+</ol>
+</li>
+<li>从map中获取排班编号(scheduledId)</li>
+<li>根据医院编号和排班编号查询出排班对象<ol>
+<li>如果查询出有，根据排班对象的id进行删除</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h2 id="1-3-医院详情"><a href="#1-3-医院详情" class="headerlink" title="1.3. 医院详情"></a>1.3. 医院详情</h2><p>对应在医院列表中的每一个数据，需要显示出医院名称、等级、地区，点击按钮可以查看具体详情</p>
+<p>但是等级信息是在数据字典数据库表中，mongodb中只有hostype(等级数值)，因此使用<strong>远程调用</strong></p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/project/image-20231022164945276.png" srcset="/img/loading.gif" lazyload alt="image-20231022164945276"></p>
+<p>注册中心选择：nacos</p>
+<p>同时在需要注册的服务配置文件中</p>
+<ol>
+<li><p>引入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 服务注册 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>声明nacos的服务地址</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># nacos服务地址</span><br><span class="hljs-attr">spring.cloud.nacos.discovery.server-addr</span>=<span class="hljs-string">127.0.0.1:8848</span><br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>启动类上添加注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@EnableDiscoveryClient</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="1-3-1-医院列表-条件查询分页"><a href="#1-3-1-医院列表-条件查询分页" class="headerlink" title="1.3.1. 医院列表(条件查询分页)"></a>1.3.1. 医院列表(条件查询分页)</h3><p>实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@ApiModel(description = &quot;Hospital&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HospitalQueryVo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br>	<br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;医院编号&quot;)</span><br>	<span class="hljs-keyword">private</span> String hoscode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;医院名称&quot;)</span><br>	<span class="hljs-keyword">private</span> String hosname;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;医院类型&quot;)</span><br>	<span class="hljs-keyword">private</span> String hostype;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;省code&quot;)</span><br>	<span class="hljs-keyword">private</span> String provinceCode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;市code&quot;)</span><br>	<span class="hljs-keyword">private</span> String cityCode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;区code&quot;)</span><br>	<span class="hljs-keyword">private</span> String districtCode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;状态&quot;)</span><br>	<span class="hljs-keyword">private</span> Integer status;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//医院列表(条件查询分页)</span><br><span class="hljs-meta">@GetMapping(&quot;list/&#123;page&#125;/&#123;limit&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">listHosp</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Integer page,</span><br><span class="hljs-params">                       <span class="hljs-meta">@PathVariable</span> Integer limit,</span><br><span class="hljs-params">                       HospitalQueryVo hospitalQueryVo)</span> &#123;<br>    Page&lt;Hospital&gt; pageModel = hospitalService.selectHospPage(page,limit,hospitalQueryVo);<br>    <span class="hljs-keyword">return</span> Result.ok(pageModel);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li><p>创建pageable对象，创建条件匹配器，hospitalSetQueryVo转换Hospital对象，创建对象</p>
+</li>
+<li><p>调用MongoDB方法实现查询</p>
+</li>
+<li><p>获取查询list集合，遍历进行医院等级封装</p>
+<ol>
+<li>根据dictCode和value获取医院等级名称</li>
+</ol>
+<blockquote>
+<p> 在service-cmn模块中的DictController，添加接口：</p>
+<ol>
+<li>根据dictCode和value值查询返回name值，此时根据dictCode查询出dict对象，根据这个对象的id和value值能唯一匹配到这个name</li>
+<li>根据value值查询返回name值，此时没有dictCode，直接构造条件查询出来dict对象，返回name即可</li>
+</ol>
+</blockquote>
+</li>
+<li><p>通过feign进行远程调用：</p>
+<ol>
+<li><p>构建service-client模块，在该模块下面service-cmn-client模块</p>
+</li>
+<li><p>添加Feign接口类：（此时一定要写@PathVariable注解，否则会出错）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FeignClient(value = &quot;service-cmn&quot;)</span> <span class="hljs-comment">//提供方服务名称</span><br><span class="hljs-meta">@Repository</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">DictFeignClient</span> &#123;<br><br>    <span class="hljs-meta">@GetMapping(value = &quot;/admin/cmn/dict/getName/&#123;dictCode&#125;/&#123;value&#125;&quot;)</span><br>    String <span class="hljs-title function_">getName</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;dictCode&quot;)</span> String dictCode, <span class="hljs-meta">@PathVariable(&quot;value&quot;)</span> String value)</span>;<br><br>    <span class="hljs-meta">@GetMapping(value = &quot;/admin/cmn/dict/getName/&#123;value&#125;&quot;)</span><br>    String <span class="hljs-title function_">getName</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;value&quot;)</span> String value)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个接口中的内容就是在cmn中添加的两个接口（根据dictCode和value值查询返回name值，根据value值查询返回name值）</p>
+</blockquote>
+</li>
+<li><p>同时在消费端添加<code>service-cmn-client</code>依赖，添加远程调用对象，将所有的信息封装到param中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> Hospital <span class="hljs-title function_">setHospitalHosType</span><span class="hljs-params">(Hospital hospital)</span> &#123;<br>    <span class="hljs-comment">//根据dictCode和value获取医院等级名称</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">hostypeString</span> <span class="hljs-operator">=</span> dictFeignClient.getName(<span class="hljs-string">&quot;Hostype&quot;</span>, hospital.getHostype());<br>    <span class="hljs-comment">//查询省 市  地区</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">provinceString</span> <span class="hljs-operator">=</span> dictFeignClient.getName(hospital.getProvinceCode());<br>    <span class="hljs-type">String</span> <span class="hljs-variable">cityString</span> <span class="hljs-operator">=</span> dictFeignClient.getName(hospital.getCityCode());<br>    <span class="hljs-type">String</span> <span class="hljs-variable">districtString</span> <span class="hljs-operator">=</span> dictFeignClient.getName(hospital.getDistrictCode());<br><br>    hospital.getParam().put(<span class="hljs-string">&quot;fullAddress&quot;</span>,provinceString+cityString+districtString);<br>    hospital.getParam().put(<span class="hljs-string">&quot;hostypeString&quot;</span>,hostypeString);<br>    <span class="hljs-keyword">return</span> hospital;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>由于远程调用在其他模块中，在消费端的启动类上添加注解，指定扫描路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@EnableFeignClients(basePackages = &quot;com.laibaijiang&quot;)</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</blockquote>
+<h3 id="1-3-2-查询所有子节点"><a href="#1-3-2-查询所有子节点" class="headerlink" title="1.3.2. 查询所有子节点"></a>1.3.2. 查询所有子节点</h3><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/project/image-20231022172443501.png" srcset="/img/loading.gif" lazyload alt="image-20231022172443501"></p>
+<p>此时需要在service-cmn模块中添加根据dict_code查询所有子节点数据的接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ApiOperation(value = &quot;根据dictCode获取下级节点&quot;)</span><br><span class="hljs-meta">@GetMapping(value = &quot;/findByDictCode/&#123;dictCode&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result&lt;List&lt;Dict&gt;&gt; <span class="hljs-title function_">findByDictCode</span><span class="hljs-params">(</span><br><span class="hljs-params">        <span class="hljs-meta">@PathVariable</span> String dictCode)</span> &#123;<br>    List&lt;Dict&gt; list = dictService.findByDictCode(dictCode);<br>    <span class="hljs-keyword">return</span> Result.ok(list);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>根据dictCode查询出dict对象</li>
+<li>得到dict对象的id</li>
+<li>根据这个id就可以查询出里面的子数据</li>
+</ol>
+</blockquote>
+<h3 id="1-3-3-更新医院上线状态"><a href="#1-3-3-更新医院上线状态" class="headerlink" title="1.3.3. 更新医院上线状态"></a>1.3.3. 更新医院上线状态</h3><p>传入医院的id和状态值，更新mongodb的状态</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//更新医院上线状态</span><br><span class="hljs-meta">@ApiOperation(value = &quot;更新医院上线状态&quot;)</span><br><span class="hljs-meta">@GetMapping(&quot;updateHospStatus/&#123;id&#125;/&#123;status&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">updateHospStatus</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> String id,<span class="hljs-meta">@PathVariable</span> Integer status)</span> &#123;<br>    hospitalService.updateStatus(id,status);<br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>根据id查询出hospital对象</li>
+<li>更新状态值和时间</li>
+<li>保存。</li>
+</ol>
+</blockquote>
+<h3 id="1-3-4-查看医院详情信息"><a href="#1-3-4-查看医院详情信息" class="headerlink" title="1.3.4. 查看医院详情信息"></a>1.3.4. 查看医院详情信息</h3><p>由于在前端中需要展示出医院的相关信息，也需要展示出医院预约的相关信息，因此使用一个map进行封装</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//医院详情信息</span><br><span class="hljs-meta">@ApiOperation(value = &quot;医院详情信息&quot;)</span><br><span class="hljs-meta">@GetMapping(&quot;showHospDetail/&#123;id&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">showHospDetail</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> String id)</span> &#123;<br>    Map&lt;String, Object&gt; map = hospitalService.getHospById(id);<br>    <span class="hljs-keyword">return</span> Result.ok(map);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>根据id得到医院对象</li>
+<li>封装医院的等级信息+省市区等信息</li>
+<li>最后将医院对象和预约规则封装到map中</li>
+</ol>
+</blockquote>
+<h3 id="1-3-5-医院排班信息管理"><a href="#1-3-5-医院排班信息管理" class="headerlink" title="1.3.5. 医院排班信息管理"></a>1.3.5. 医院排班信息管理</h3><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/project/image-20231022205432834.png" srcset="/img/loading.gif" lazyload alt="image-20231022205432834"></p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/project/image-20231022205634604.png" srcset="/img/loading.gif" lazyload alt="image-20231022205634604"></p>
+<h4 id="1-3-5-1-根据医院编号查询所有科室"><a href="#1-3-5-1-根据医院编号查询所有科室" class="headerlink" title="1.3.5.1. 根据医院编号查询所有科室"></a>1.3.5.1. 根据医院编号查询所有科室</h4><p>实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@ApiModel(description = &quot;Department&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DepartmentVo</span> &#123;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;科室编号&quot;)</span><br>	<span class="hljs-keyword">private</span> String depcode;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;科室名称&quot;)</span><br>	<span class="hljs-keyword">private</span> String depname;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;下级节点&quot;)</span><br>	<span class="hljs-keyword">private</span> List&lt;DepartmentVo&gt; children;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/admin/hosp/department&quot;)</span><br><span class="hljs-comment">//@CrossOrigin</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DepartmentController</span> &#123;<br><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> DepartmentService departmentService;<br><br>  <span class="hljs-comment">//根据医院编号，查询医院所有科室列表</span><br>  <span class="hljs-meta">@ApiOperation(value = &quot;查询医院所有科室列表&quot;)</span><br>  <span class="hljs-meta">@GetMapping(&quot;getDeptList/&#123;hoscode&#125;&quot;)</span><br>  <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getDeptList</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> String hoscode)</span> &#123;<br>      List&lt;DepartmentVo&gt; list = departmentService.findDeptTree(hoscode);<br>      <span class="hljs-keyword">return</span> Result.ok(list);<br>  &#125;<br><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>根据医院编号，在mongodb中查询出所有的科室信息</li>
+<li>根据大科室编号进行分组，获取每个大科室下面的子科室信息（使用stream流）</li>
+<li>遍历得到的map，key：大科室的编号，value：大科室列表<ol>
+<li>封装大科室，设置科室名和科室号</li>
+<li>封装小科室，遍历每一个大科室，得到小科室的科室号和科室名，封装到小科室，设置一个小科室列表，每封装好一个小科室就添加进去</li>
+<li>最终将小科室列表添加到大科室的children。</li>
+<li>将封装好的大科室对象添加到结果中去。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h4 id="1-3-5-2-根据医院和科室查询排班数据"><a href="#1-3-5-2-根据医院和科室查询排班数据" class="headerlink" title="1.3.5.2. 根据医院和科室查询排班数据"></a>1.3.5.2. 根据医院和科室查询排班数据</h4><p>实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@ApiModel(description = &quot;可预约排班规则数据&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BookingScheduleRuleVo</span> &#123;<br>	<br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;可预约日期&quot;)</span><br>	<span class="hljs-meta">@JsonFormat(pattern = &quot;yyyy-MM-dd&quot;)</span><br>	<span class="hljs-keyword">private</span> Date workDate;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;可预约日期&quot;)</span><br>	<span class="hljs-meta">@JsonFormat(pattern = &quot;MM月dd日&quot;)</span><br>	<span class="hljs-keyword">private</span> Date workDateMd; <span class="hljs-comment">//方便页面使用</span><br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;周几&quot;)</span><br>	<span class="hljs-keyword">private</span> String dayOfWeek;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;就诊医生人数&quot;)</span><br>	<span class="hljs-keyword">private</span> Integer docCount;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;科室可预约数&quot;)</span><br>	<span class="hljs-keyword">private</span> Integer reservedNumber;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;科室剩余预约数&quot;)</span><br>	<span class="hljs-keyword">private</span> Integer availableNumber;<br><br>	<span class="hljs-meta">@ApiModelProperty(value = &quot;状态 0：正常 1：即将放号 -1：当天已停止挂号&quot;)</span><br>	<span class="hljs-keyword">private</span> Integer status;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ApiOperation(value =&quot;查询排班规则数据&quot;)</span><br><span class="hljs-meta">@GetMapping(&quot;getScheduleRule/&#123;page&#125;/&#123;limit&#125;/&#123;hoscode&#125;/&#123;depcode&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getScheduleRule</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> <span class="hljs-type">long</span> page,</span><br><span class="hljs-params">                              <span class="hljs-meta">@PathVariable</span> <span class="hljs-type">long</span> limit,</span><br><span class="hljs-params">                              <span class="hljs-meta">@PathVariable</span> String hoscode,</span><br><span class="hljs-params">                              <span class="hljs-meta">@PathVariable</span> String depcode)</span> &#123;<br>    Map&lt;String,Object&gt; map = scheduleService.getRuleSchedule(page,limit,hoscode,depcode);<br>    <span class="hljs-keyword">return</span> Result.ok(map);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>根据医院编号和科室编号进行查询</li>
+<li>根据工作日workDate进行分组，同时需要将查询出来的时期进行转换为星期几</li>
+<li>统计号源数量</li>
+<li>实现分页</li>
+</ol>
+</blockquote>
+<h4 id="1-3-5-3-查询排班详情数据"><a href="#1-3-5-3-查询排班详情数据" class="headerlink" title="1.3.5.3. 查询排班详情数据"></a>1.3.5.3. 查询排班详情数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//根据医院编号 、科室编号和工作日期，查询排班详细信息</span><br><span class="hljs-meta">@ApiOperation(value = &quot;查询排班详细信息&quot;)</span><br><span class="hljs-meta">@GetMapping(&quot;getScheduleDetail/&#123;hoscode&#125;/&#123;depcode&#125;/&#123;workDate&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">getScheduleDetail</span><span class="hljs-params">( <span class="hljs-meta">@PathVariable</span> String hoscode,</span><br><span class="hljs-params">                                 <span class="hljs-meta">@PathVariable</span> String depcode,</span><br><span class="hljs-params">                                 <span class="hljs-meta">@PathVariable</span> String workDate)</span> &#123;<br>    List&lt;Schedule&gt; list = scheduleService.getDetailSchedule(hoscode,depcode,workDate);<br>    <span class="hljs-keyword">return</span> Result.ok(list);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>步骤：</p>
+<ol>
+<li>根据医院编号、科室编号以及转换后的星期几查询排班数据</li>
+<li>遍历得到的list数据，对每一个排班数据中封装对应的信息：医院名称、科室名称、日期对应的星期几</li>
+</ol>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/%E5%B0%9A%E5%8C%BB%E9%80%9A/" class="category-chain-item">尚医通</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%A1%B9%E7%9B%AE/" class="print-no-link">#项目</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>尚医通-管理员后端管理系统-医院设置管理</div>
+      <div>http://example.com/2023/10/22/尚医通-管理员后端管理系统-医院设置管理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/21/%E5%B0%9A%E5%8C%BB%E9%80%9A-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/" title="尚医通-前置知识">
+                        <span class="hidden-mobile">尚医通-前置知识</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

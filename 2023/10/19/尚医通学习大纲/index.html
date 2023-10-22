@@ -16,16 +16,16 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言：学习过程并不严格按照视频每一天的进度划分，重点掌握一些技术，以后端接口开发为核心，前端能看懂就行了">
+    <meta name="description" content="背景：现在需要掌握一些前后端的技术应对工作上的事，所以选择了使用该项目进行学习，着重学习后端接口开发，落实后端开发的具体细节。 补充一句：这个项目的结构是很规范的，以后如果有微服务相关的开发，可以参考此项目。 不足之处：  没有涉及到高并发的处理 没有涉及到事务的处理。  但是这两个问题将会在之后的其他项目进行补充学习，本项目仅作为开端学习。  1. 项目架构  直白的翻译一下这个项目做了什么">
 <meta property="og:type" content="article">
-<meta property="og:title" content="尚医通学习day01">
-<meta property="og:url" content="http://example.com/2023/10/19/%E5%B0%9A%E5%8C%BB%E9%80%9A%E5%AD%A6%E4%B9%A001/index.html">
+<meta property="og:title" content="尚医通项目学习大纲">
+<meta property="og:url" content="http://example.com/2023/10/19/%E5%B0%9A%E5%8C%BB%E9%80%9A%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/index.html">
 <meta property="og:site_name" content="Lai">
-<meta property="og:description" content="前言：学习过程并不严格按照视频每一天的进度划分，重点掌握一些技术，以后端接口开发为核心，前端能看懂就行了">
+<meta property="og:description" content="背景：现在需要掌握一些前后端的技术应对工作上的事，所以选择了使用该项目进行学习，着重学习后端接口开发，落实后端开发的具体细节。 补充一句：这个项目的结构是很规范的，以后如果有微服务相关的开发，可以参考此项目。 不足之处：  没有涉及到高并发的处理 没有涉及到事务的处理。  但是这两个问题将会在之后的其他项目进行补充学习，本项目仅作为开端学习。  1. 项目架构  直白的翻译一下这个项目做了什么">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/%E5%B0%9A%E5%8C%BB%E9%80%9A/hosp.png">
 <meta property="article:published_time" content="2023-10-19T13:29:14.000Z">
-<meta property="article:modified_time" content="2023-10-19T14:01:42.395Z">
+<meta property="article:modified_time" content="2023-10-21T14:25:30.360Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="项目">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>尚医通学习day01 - Lai</title>
+  <title>尚医通项目学习大纲 - Lai</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="尚医通学习day01"></span>
+            <span id="subtitle" data-typed-text="尚医通项目学习大纲"></span>
           
         </div>
 
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          52 字
+          805 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -272,12 +272,156 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">尚医通学习day01</h1>
+            <h1 id="seo-header">尚医通项目学习大纲</h1>
             
             
               <div class="markdown-body">
                 
-                <p>前言：学习过程并不严格按照视频每一天的进度划分，重点掌握一些技术，以后端接口开发为核心，前端能看懂就行了</p>
+                <blockquote>
+<p> 背景：现在需要掌握一些前后端的技术应对工作上的事，所以选择了使用该项目进行学习，着重学习后端接口开发，落实后端开发的具体细节。</p>
+<p>补充一句：这个项目的结构是很规范的，以后如果有微服务相关的开发，可以参考此项目。</p>
+<p>不足之处：</p>
+<ul>
+<li>没有涉及到高并发的处理</li>
+<li>没有涉及到事务的处理。</li>
+</ul>
+<p>但是这两个问题将会在之后的其他项目进行补充学习，本项目仅作为开端学习。</p>
+</blockquote>
+<h1 id="1-项目架构"><a href="#1-项目架构" class="headerlink" title="1. 项目架构"></a>1. 项目架构</h1><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/project/%E5%B0%9A%E5%8C%BB%E9%80%9A%E6%9E%B6%E6%9E%84%E5%9B%BE.png" srcset="/img/loading.gif" lazyload alt="尚医通架构图"></p>
+<blockquote>
+<p>直白的翻译一下这个项目做了什么？</p>
+<ol>
+<li>搭建了一个门户系统用来对接每个医院，通过这么门户系统来完成在一个界面就可以预约不同医院的号。</li>
+<li>那么整个开发阶段中，实际上就是：一个后端项目（管理员后端管理系统+用户系统）+一个管理员前端项目+一个用户前端项目。并且给出了一个模拟的医院对接系统。</li>
+</ol>
+</blockquote>
+<h1 id="2-项目功能"><a href="#2-项目功能" class="headerlink" title="2. 项目功能"></a>2. 项目功能</h1><h2 id="2-1-管理员后端管理系统"><a href="#2-1-管理员后端管理系统" class="headerlink" title="2.1. 管理员后端管理系统"></a>2.1. 管理员后端管理系统</h2><blockquote>
+<ol>
+<li><p>医院设置管理</p>
+<ol>
+<li>医院设置列表、添加、锁定、删除</li>
+<li>医院列表、详情、排班、下线</li>
+</ol>
+</li>
+<li><p>数据管理</p>
+<ol>
+<li>数据字典树形显示、导入、导出</li>
+</ol>
+</li>
+<li><p>用户管理</p>
+<ol>
+<li>用户列表、查看、锁定</li>
+<li>认证用户审批</li>
+</ol>
+</li>
+<li><p>订单管理</p>
+<ol>
+<li>订单列表、详情</li>
+</ol>
+</li>
+<li><p>统计管理</p>
+<ol>
+<li>预约统计</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h2 id="2-2-用户后台系统"><a href="#2-2-用户后台系统" class="headerlink" title="2.2. 用户后台系统"></a>2.2. 用户后台系统</h2><blockquote>
+<ol>
+<li><p>首页数据显示</p>
+<ol>
+<li>医院列表</li>
+</ol>
+</li>
+<li><p>医院详情显示</p>
+<ol>
+<li>医院科室显示</li>
+</ol>
+</li>
+<li><p>用户登录功能</p>
+<ol>
+<li>手机号登录（短信验证码发送）</li>
+<li>微信扫描登录</li>
+</ol>
+</li>
+<li><p>用户实名认证</p>
+</li>
+<li><p>就诊人管理</p>
+<ol>
+<li>列表、添加、详情、删除</li>
+</ol>
+</li>
+<li><p>预约挂号功能</p>
+<ol>
+<li>排班和挂号详情信息</li>
+<li>确认挂号信息</li>
+<li>生成预约挂号订单</li>
+<li>挂号订单支付（微信）</li>
+<li>取消预约订单</li>
+</ol>
+</li>
+<li><p>就医提醒功能</p>
+</li>
+</ol>
+</blockquote>
+<h1 id="3-项目技术"><a href="#3-项目技术" class="headerlink" title="3. 项目技术"></a>3. 项目技术</h1><h2 id="3-1-后端技术"><a href="#3-1-后端技术" class="headerlink" title="3.1. 后端技术"></a>3.1. 后端技术</h2><blockquote>
+<ol>
+<li><p>SpringBoot</p>
+</li>
+<li><p>SpringCloud</p>
+<ol>
+<li>Nacos注册中心</li>
+<li>Feign</li>
+<li>GateWay</li>
+</ol>
+</li>
+<li><p>Redis</p>
+<ol>
+<li>使用Redis作为缓存</li>
+<li>验证码有效时间、支付二维码有效时间</li>
+</ol>
+</li>
+<li><p>MongoDB</p>
+<ol>
+<li>使用MongoDB存储 医院相关数据</li>
+</ol>
+</li>
+<li><p>EasyExcel</p>
+<ol>
+<li>操作excel表格，进行读和写操作</li>
+</ol>
+</li>
+<li><p>MyBatisPlus</p>
+</li>
+<li><p>RabbitMQ</p>
+<ol>
+<li>订单相关操作，发送mq消息</li>
+</ol>
+</li>
+<li><p>阿里云OSS</p>
+</li>
+<li><p>阿里云短信服务</p>
+</li>
+<li><p>微信登录&#x2F;支付</p>
+</li>
+<li><p>定时任务</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="3-2-前端技术"><a href="#3-2-前端技术" class="headerlink" title="3.2. 前端技术"></a>3.2. 前端技术</h2><blockquote>
+<ol>
+<li><p>vue</p>
+</li>
+<li><p>Element-ui</p>
+</li>
+<li><p>nuxt</p>
+</li>
+<li><p>npm(此项目建议使用node14及其以下版本)</p>
+</li>
+<li><p>ECharts</p>
+</li>
+</ol>
+</blockquote>
 
                 
               </div>
@@ -330,8 +474,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>尚医通学习day01</div>
-      <div>http://example.com/2023/10/19/尚医通学习01/</div>
+      <div>尚医通项目学习大纲</div>
+      <div>http://example.com/2023/10/19/尚医通学习大纲/</div>
     </div>
     <div class="license-meta">
       
@@ -374,6 +518,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/10/21/%E5%B0%9A%E5%8C%BB%E9%80%9A-%E7%AE%A1%E7%90%86%E5%91%98%E5%90%8E%E7%AB%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="尚医通-管理员后端管理系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">尚医通-管理员后端管理系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

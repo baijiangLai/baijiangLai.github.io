@@ -4,6 +4,59 @@
   
   
   <entry>
+    <title>leetcode-hot100-双指针</title>
+    <link href="/leetcode-hot100-%E5%8F%8C%E6%8C%87%E9%92%88/fa7554c1833c/"/>
+    <url>/leetcode-hot100-%E5%8F%8C%E6%8C%87%E9%92%88/fa7554c1833c/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-移动零"><a href="#1-移动零" class="headerlink" title="1. 移动零"></a>1. 移动零</h1><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/LeetCode/image-20231202172905894.png" alt="image-20231202172905894"></p><h1 id="2-盛最多水的容器"><a href="#2-盛最多水的容器" class="headerlink" title="2. 盛最多水的容器"></a>2. 盛最多水的容器</h1><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/LeetCode/image-20231202174344254.png" alt="image-20231202174344254"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>双指针</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>leetcode-hot100-哈希</title>
+    <link href="/leetcode-hot100-%E5%93%88%E5%B8%8C/91774001b143/"/>
+    <url>/leetcode-hot100-%E5%93%88%E5%B8%8C/91774001b143/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a>1. 两数之和</h1><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/LeetCode/image-20231202170319592.png" alt="image-20231202170319592"></p><h1 id="2-字母异位词分组"><a href="#2-字母异位词分组" class="headerlink" title="2. 字母异位词分组"></a>2. 字母异位词分组</h1><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/LeetCode/image-20231202171402767.png" alt="image-20231202171402767"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>JVM-初识</title>
+    <link href="/JVM-%E5%88%9D%E8%AF%86/4d497dcc2a33/"/>
+    <url>/JVM-%E5%88%9D%E8%AF%86/4d497dcc2a33/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-什么是JVM？"><a href="#1-什么是JVM？" class="headerlink" title="1. 什么是JVM？"></a>1. 什么是JVM？</h1><p>JVM本质上是一个运行在计算机上的程序，职责是运行<strong>Java字节码文件</strong>。</p><h2 id="1-1-功能"><a href="#1-1-功能" class="headerlink" title="1.1. 功能"></a>1.1. 功能</h2><h3 id="1-1-1-解释和运行"><a href="#1-1-1-解释和运行" class="headerlink" title="1.1.1. 解释和运行"></a>1.1.1. 解释和运行</h3><ul><li>对字节码文件中的指令实时的解释成机器码，让计算机执行。</li></ul><h3 id="1-1-2-内存管理"><a href="#1-1-2-内存管理" class="headerlink" title="1.1.2. 内存管理"></a>1.1.2. 内存管理</h3><ul><li>自动为对象、方法分配内存</li><li>自动的垃圾回收机制，回收不再使用的对象</li></ul><h3 id="1-1-3-即时编译"><a href="#1-1-3-即时编译" class="headerlink" title="1.1.3. 即时编译"></a>1.1.3. 即时编译</h3><ul><li>对热点代码进行优化，提升执行效率</li></ul><h1 id="2-字节码"><a href="#2-字节码" class="headerlink" title="2. 字节码"></a>2. 字节码</h1><h2 id="2-1-Java虚拟机的组成"><a href="#2-1-Java虚拟机的组成" class="headerlink" title="2.1. Java虚拟机的组成"></a>2.1. Java虚拟机的组成</h2><h3 id="2-1-1-字节码文件"><a href="#2-1-1-字节码文件" class="headerlink" title="2.1.1. 字节码文件"></a>2.1.1. 字节码文件</h3><h3 id="2-1-2-类加载器"><a href="#2-1-2-类加载器" class="headerlink" title="2.1.2. 类加载器"></a>2.1.2. 类加载器</h3><h3 id="2-1-3-运行时数据区"><a href="#2-1-3-运行时数据区" class="headerlink" title="2.1.3. 运行时数据区"></a>2.1.3. 运行时数据区</h3><h3 id="2-1-4-执行引擎"><a href="#2-1-4-执行引擎" class="headerlink" title="2.1.4. 执行引擎"></a>2.1.4. 执行引擎</h3><h3 id="2-1-5-本地接口"><a href="#2-1-5-本地接口" class="headerlink" title="2.1.5. 本地接口"></a>2.1.5. 本地接口</h3><h2 id="2-2-字节码文件的组成"><a href="#2-2-字节码文件的组成" class="headerlink" title="2.2. 字节码文件的组成"></a>2.2. 字节码文件的组成</h2><p>组成：基础信息（魔术、字节码文件对应的Java版本号、访问标识、父类、接口）+常量池（字符串长了、类、接口名、字段名）+字段（当前类或接口声明的字段信息）+方法（当前类或者接口声明的方法信息-字节码指令）+属性（类的属性）</p><h3 id="2-2-1-基本信息"><a href="#2-2-1-基本信息" class="headerlink" title="2.2.1. 基本信息"></a>2.2.1. 基本信息</h3><h4 id="2-2-1-1-Magic魔数"><a href="#2-2-1-1-Magic魔数" class="headerlink" title="2.2.1.1. Magic魔数"></a>2.2.1.1. Magic魔数</h4><ol><li>文件是无法通过文件扩展名来确定文件类型的，文件扩展名可以随意修改，不影响文件的内容。</li><li>软件使用文件的头几个字节（文件头）去校验文件的类型，如果软件不支持该种类型就会出错。</li><li>Java字节码文件中，将文件头称为magic魔数。</li></ol><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/JVM/image-20231119172258093.png" alt="image-20231119172258093"></p><h4 id="2-2-1-2-主副版本号"><a href="#2-2-1-2-主副版本号" class="headerlink" title="2.2.1.2. 主副版本号"></a>2.2.1.2. 主副版本号</h4><ol><li>主副版本号指的是编译字节码文件的JDK版本号，主版本号用来标识大版本号，JDK1.0-1.1使用了45.0-45.3，JDK1.2是46之后每升级一个大版本就加1；副版本号是当主版本号相同时作为区分不同版本的标识，一般只需要关心主版本号。</li><li>版本号的作用主要是判断当前字节码的版本和运行时的JDK是否兼容。</li></ol><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/JVM/image-20231119172800285.png" alt="image-20231119172800285"></p><h3 id="2-2-2-常量池"><a href="#2-2-2-常量池" class="headerlink" title="2.2.2. 常量池"></a>2.2.2. 常量池</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-type">final</span> <span class="hljs-variable">xxx</span> <span class="hljs-operator">=</span> xx;<br></code></pre></td></tr></table></figure><ul><li>常量池中的数据都有一个编号，编号从1开始。</li><li>在字段或者字节码指令中通过编号可以快速的找到对应的数据。</li><li>字节码指令中通过编号引用到常量池的过程称之为符号引用。</li></ul><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/JVM/image-20231119174257978.png" alt="image-20231119174257978"></p><p>作用：避免相同的内容重复定义，节省空间。</p><h3 id="2-2-3-方法"><a href="#2-2-3-方法" class="headerlink" title="2.2.3. 方法"></a>2.2.3. 方法</h3><p>字节码中的<strong>方法区域是存放字节码指令的核心位置</strong>，字节码指令的内容存放在方法的Code属性中。</p><p>操作数栈是临时存放数据的地方。</p><p>局部变量表是存放方法中的局部变量的位置。</p><h4 id="2-2-3-1-字节码指令"><a href="#2-2-3-1-字节码指令" class="headerlink" title="2.2.3.1. 字节码指令"></a>2.2.3.1. 字节码指令</h4><p>具体：<a href="https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-6.html#jvms-6.5.iinc">https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-6.html#jvms-6.5.iinc</a></p><p>iconst:将常量x放入到操作数栈中</p><p>Istore:将操作数栈的数据弹出放入到局部变量表指定的位置</p><p>Iload:将局部变量表第几个位置的数据放入操作数栈中</p><p>Iadd: 将操作数栈的上面的两个数相加</p><h3 id="2-2-4-Arthas"><a href="#2-2-4-Arthas" class="headerlink" title="2.2.4. Arthas"></a>2.2.4. Arthas</h3><p>官方：<a href="https://arthas.aliyun.com/doc/download.html">https://arthas.aliyun.com/doc/download.html</a></p><h2 id="2-3-类的生命周期"><a href="#2-3-类的生命周期" class="headerlink" title="2.3. 类的生命周期"></a>2.3. 类的生命周期</h2><p>作用：描述了一个类加载、使用、卸载的整个过程</p><h3 id="2-3-1-生命周期的概述"><a href="#2-3-1-生命周期的概述" class="headerlink" title="2.3.1. 生命周期的概述"></a>2.3.1. 生命周期的概述</h3><p>整个周期分为：</p><ol><li>加载</li><li>连接<ol><li>验证</li><li>准备</li><li>解析</li></ol></li><li>初始化</li><li>使用</li><li>卸载</li></ol><h3 id="2-3-2-加载阶段"><a href="#2-3-2-加载阶段" class="headerlink" title="2.3.2. 加载阶段"></a>2.3.2. 加载阶段</h3><ol><li><p>类加载器根据类的全限定名通过不同的渠道以二进制流的方式获取字节码信息。</p></li><li><p>类加载器在加载完类之后，Java虚拟机会将字节码中的信息保存到方法区中。</p><blockquote><p>会生成一个InstanceKlass对象，这个对象保存类所有的信息，里面还包含实现特定功能（多态-虚方发表）</p><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/JVM/image-20231120070720565.png" alt="image-20231120070720565"></p></blockquote></li><li><p>Java虚拟机还会在堆中生成一份与方法区中数据类似的java.lang.Class对象。</p><ol><li>作用：在Java代码中去获取类的信息以及存储静态字段的数据（JDK8及之后）。</li><li><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/JVM/image-20231120071027988.png" alt="image-20231120071027988"></li><li>对于开发者来说，只需要访问堆中的Class对象而不需要访问方法区中所有信息。好处：这样Java虚拟机就能很好地控制开发者访问数据的范围。</li></ol></li><li><p>总结：类加载器将类信息加载到内存中，JVM在方法区和堆区中各分配一个对象保存类信息。开发者一般使用堆区的java.lang.Class对象</p></li></ol><h3 id="2-3-3-连接阶段"><a href="#2-3-3-连接阶段" class="headerlink" title="2.3.3. 连接阶段"></a>2.3.3. 连接阶段</h3><ol><li>验证：验证内容是否满足规范</li><li>准备：给静态变量赋初值</li><li>解析：将常量池中的符号引用替换成指向内存的直接引用</li></ol><h4 id="2-3-3-1-验证"><a href="#2-3-3-1-验证" class="headerlink" title="2.3.3.1. 验证"></a>2.3.3.1. 验证</h4><p>验证的主要目的是检测Java字节码文件是否遵守了《Java虚拟机规范》中的约束。</p><p>校验的内容：</p><ol><li>文件格式验证，比如文件是否以0xCAFEBABE开头，主次版本号是否满足当前Java虚拟机版本要求。</li><li>元信息验证，例如类必须有父类（super不能为空）。</li><li>验证程序执行指令的语义，比如方法内的指令执行中跳转到不正确的位置。</li><li>符号引用验证，例如是否访问了其他类中private的方法等。</li></ol><h4 id="2-3-3-2-准备"><a href="#2-3-3-2-准备" class="headerlink" title="2.3.3.2. 准备"></a>2.3.3.2. 准备</h4><ol><li><p>准备阶段为静态变量（static）分配内存并设置初始值。</p><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/JVM/image-20231120073427570.png" alt="image-20231120073427570"></p></li><li><p>final修饰的基本数据类型的静态变量，准备阶段直接会将代码中的值进行赋值。</p></li></ol><h4 id="2-3-3-3-解析"><a href="#2-3-3-3-解析" class="headerlink" title="2.3.3.3. 解析"></a>2.3.3.3. 解析</h4><ol><li>解析阶段主要是将常量池中的符号引用替换为直接引用。<ol><li>符号引用就是在字节码文件中使用编号来访问常量池中的内容。</li><li>直接引用不再使用编号，而是使用内存中地址进行访问具体的数据。</li></ol></li></ol><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/JVM/image-20231120073624686.png" alt="符号引用"></p><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/JVM/image-20231120073649388.png" alt="直接引用"></p><h3 id="2-3-4-初始化阶段"><a href="#2-3-4-初始化阶段" class="headerlink" title="2.3.4. 初始化阶段"></a>2.3.4. 初始化阶段</h3><h2 id="2-4-类加载器"><a href="#2-4-类加载器" class="headerlink" title="2.4. 类加载器"></a>2.4. 类加载器</h2>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>尚医通-用户后端管理</title>
     <link href="/%E5%B0%9A%E5%8C%BB%E9%80%9A-%E7%94%A8%E6%88%B7%E5%90%8E%E7%AB%AF%E7%AE%A1%E7%90%86/a564a7e6212c/"/>
     <url>/%E5%B0%9A%E5%8C%BB%E9%80%9A-%E7%94%A8%E6%88%B7%E5%90%8E%E7%AB%AF%E7%AE%A1%E7%90%86/a564a7e6212c/</url>

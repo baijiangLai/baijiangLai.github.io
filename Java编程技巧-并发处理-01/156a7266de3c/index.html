@@ -16,26 +16,26 @@
   <meta name="author" content="Lai Baijiang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景：现在需要掌握一些前后端的技术应对工作上的事，所以选择了使用该项目进行学习，着重学习后端接口开发，落实后端开发的具体细节。 补充一句：这个项目的结构是很规范的，以后如果有微服务相关的开发，可以参考此项目。 不足之处：  没有涉及到高并发的处理 没有涉及到事务的处理。  但是这两个问题将会在之后的其他项目进行补充学习，本项目仅作为开端学习。  1. 项目架构  直白的翻译一下这个项目做了什么">
+    <meta name="description" content="背景：公司的项目，自己写了一个接口的时候，请求接口的具体service涉及到异步A+同步B的情况，需要等到同步B方法执行完成之后才会释放资源，因此如何控制好并发是一个问题  1. 解决思路使用队列进行控制 2. 思路： 分析出真正会并发的一块代码 将真正会并发的那一块代码抽取出来，单独封装一个方法 将调用并发代码之前的方法A加锁，保证该方法A不会出现并发情况 在方法A中使用一个队列将需要执行的任">
 <meta property="og:type" content="article">
-<meta property="og:title" content="尚医通项目学习大纲">
-<meta property="og:url" content="https://baijianglai.cn/%E5%B0%9A%E5%8C%BB%E9%80%9A%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/eba6394c8151/index.html">
+<meta property="og:title" content="Java编程技巧-并发处理-01">
+<meta property="og:url" content="https://baijianglai.cn/Java%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86-01/156a7266de3c/index.html">
 <meta property="og:site_name" content="Lai">
-<meta property="og:description" content="背景：现在需要掌握一些前后端的技术应对工作上的事，所以选择了使用该项目进行学习，着重学习后端接口开发，落实后端开发的具体细节。 补充一句：这个项目的结构是很规范的，以后如果有微服务相关的开发，可以参考此项目。 不足之处：  没有涉及到高并发的处理 没有涉及到事务的处理。  但是这两个问题将会在之后的其他项目进行补充学习，本项目仅作为开端学习。  1. 项目架构  直白的翻译一下这个项目做了什么">
+<meta property="og:description" content="背景：公司的项目，自己写了一个接口的时候，请求接口的具体service涉及到异步A+同步B的情况，需要等到同步B方法执行完成之后才会释放资源，因此如何控制好并发是一个问题  1. 解决思路使用队列进行控制 2. 思路： 分析出真正会并发的一块代码 将真正会并发的那一块代码抽取出来，单独封装一个方法 将调用并发代码之前的方法A加锁，保证该方法A不会出现并发情况 在方法A中使用一个队列将需要执行的任">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://baijianglai.cn/img/%E5%B0%9A%E5%8C%BB%E9%80%9A/hosp.png">
-<meta property="article:published_time" content="2023-10-19T13:29:14.000Z">
-<meta property="article:modified_time" content="2023-10-29T14:29:48.906Z">
+<meta property="og:image" content="https://baijianglai.cn/img/java.png">
+<meta property="article:published_time" content="2024-02-01T13:10:40.000Z">
+<meta property="article:modified_time" content="2024-02-01T13:55:46.977Z">
 <meta property="article:author" content="Lai Baijiang">
-<meta property="article:tag" content="项目">
+<meta property="article:tag" content="Java编程技巧">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://baijianglai.cn/img/%E5%B0%9A%E5%8C%BB%E9%80%9A/hosp.png">
+<meta name="twitter:image" content="https://baijianglai.cn/img/java.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>尚医通项目学习大纲 - Lai</title>
+  <title>Java编程技巧-并发处理-01 - Lai</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="尚医通项目学习大纲"></span>
+            <span id="subtitle" data-typed-text="Java编程技巧-并发处理-01"></span>
           
         </div>
 
@@ -212,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-19 21:29" pubdate>
-          2023年10月19日 晚上
+        <time datetime="2024-02-01 21:10" pubdate>
+          2024年2月1日 晚上
         </time>
       </span>
     
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          805 字
+          3.1k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          2 分钟
+          7 分钟
         
       </span>
     
@@ -272,156 +272,49 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">尚医通项目学习大纲</h1>
+            <h1 id="seo-header">Java编程技巧-并发处理-01</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p> 背景：现在需要掌握一些前后端的技术应对工作上的事，所以选择了使用该项目进行学习，着重学习后端接口开发，落实后端开发的具体细节。</p>
-<p>补充一句：这个项目的结构是很规范的，以后如果有微服务相关的开发，可以参考此项目。</p>
-<p>不足之处：</p>
-<ul>
-<li>没有涉及到高并发的处理</li>
-<li>没有涉及到事务的处理。</li>
-</ul>
-<p>但是这两个问题将会在之后的其他项目进行补充学习，本项目仅作为开端学习。</p>
+<p>背景：公司的项目，自己写了一个接口的时候，请求接口的具体service涉及到异步A+同步B的情况，需要等到同步B方法执行完成之后才会释放资源，因此如何控制好并发是一个问题</p>
 </blockquote>
-<h1 id="1-项目架构"><a href="#1-项目架构" class="headerlink" title="1. 项目架构"></a>1. 项目架构</h1><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/project/%E5%B0%9A%E5%8C%BB%E9%80%9A%E6%9E%B6%E6%9E%84%E5%9B%BE.png" srcset="/img/loading.gif" lazyload alt="尚医通架构图"></p>
-<blockquote>
-<p>直白的翻译一下这个项目做了什么？</p>
-<ol>
-<li>搭建了一个门户系统用来对接每个医院，通过这么门户系统来完成在一个界面就可以预约不同医院的号。</li>
-<li>那么整个开发阶段中，实际上就是：一个后端项目（管理员后端管理系统+用户系统）+一个管理员前端项目+一个用户前端项目。并且给出了一个模拟的医院对接系统。</li>
+<h1 id="1-解决思路"><a href="#1-解决思路" class="headerlink" title="1. 解决思路"></a>1. 解决思路</h1><p>使用队列进行控制</p>
+<h1 id="2-思路："><a href="#2-思路：" class="headerlink" title="2. 思路："></a>2. 思路：</h1><ol>
+<li>分析出真正会并发的一块代码</li>
+<li>将真正会并发的那一块代码抽取出来，单独封装一个方法</li>
+<li>将调用并发代码之前的方法A加锁，保证该方法A不会出现并发情况</li>
+<li>在方法A中使用一个队列将需要执行的任务进行管理</li>
+<li>当有第一个请求进入的时候，此时list为空，那么直接执行并发方法，如果当list不为空，那么将任务添加进去即可。</li>
+<li>最后当第一个请求执行完成需要释放资源的时候，此时将执行的任务移除，判断list中是否有内容，如果有，取出list首位，并执行并发的方法。</li>
 </ol>
-</blockquote>
-<h1 id="2-项目功能"><a href="#2-项目功能" class="headerlink" title="2. 项目功能"></a>2. 项目功能</h1><h2 id="2-1-管理员后端管理系统"><a href="#2-1-管理员后端管理系统" class="headerlink" title="2.1. 管理员后端管理系统"></a>2.1. 管理员后端管理系统</h2><blockquote>
-<ol>
-<li><p>医院设置管理</p>
-<ol>
-<li>医院设置列表、添加、锁定、删除</li>
-<li>医院列表、详情、排班、下线</li>
-</ol>
-</li>
-<li><p>数据管理</p>
-<ol>
-<li>数据字典树形显示、导入、导出</li>
-</ol>
-</li>
-<li><p>用户管理</p>
-<ol>
-<li>用户列表、查看、锁定</li>
-<li>认证用户审批</li>
-</ol>
-</li>
-<li><p>订单管理</p>
-<ol>
-<li>订单列表、详情</li>
-</ol>
-</li>
-<li><p>统计管理</p>
-<ol>
-<li>预约统计</li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<h2 id="2-2-用户后台系统"><a href="#2-2-用户后台系统" class="headerlink" title="2.2. 用户后台系统"></a>2.2. 用户后台系统</h2><blockquote>
-<ol>
-<li><p>首页数据显示</p>
-<ol>
-<li>医院列表</li>
-</ol>
-</li>
-<li><p>医院详情显示</p>
-<ol>
-<li>医院科室显示</li>
-</ol>
-</li>
-<li><p>用户登录功能</p>
-<ol>
-<li>手机号登录（短信验证码发送）</li>
-<li>微信扫描登录</li>
-</ol>
-</li>
-<li><p>用户实名认证</p>
-</li>
-<li><p>就诊人管理</p>
-<ol>
-<li>列表、添加、详情、删除</li>
-</ol>
-</li>
-<li><p>预约挂号功能</p>
-<ol>
-<li>排班和挂号详情信息</li>
-<li>确认挂号信息</li>
-<li>生成预约挂号订单</li>
-<li>挂号订单支付（微信）</li>
-<li>取消预约订单</li>
-</ol>
-</li>
-<li><p>就医提醒功能</p>
-</li>
-</ol>
-</blockquote>
-<h1 id="3-项目技术"><a href="#3-项目技术" class="headerlink" title="3. 项目技术"></a>3. 项目技术</h1><h2 id="3-1-后端技术"><a href="#3-1-后端技术" class="headerlink" title="3.1. 后端技术"></a>3.1. 后端技术</h2><blockquote>
-<ol>
-<li><p>SpringBoot</p>
-</li>
-<li><p>SpringCloud</p>
-<ol>
-<li>Nacos注册中心</li>
-<li>Feign</li>
-<li>GateWay</li>
-</ol>
-</li>
-<li><p>Redis</p>
-<ol>
-<li>使用Redis作为缓存</li>
-<li>验证码有效时间、支付二维码有效时间</li>
-</ol>
-</li>
-<li><p>MongoDB</p>
-<ol>
-<li>使用MongoDB存储 医院相关数据</li>
-</ol>
-</li>
-<li><p>EasyExcel</p>
-<ol>
-<li>操作excel表格，进行读和写操作</li>
-</ol>
-</li>
-<li><p>MyBatisPlus</p>
-</li>
-<li><p>RabbitMQ</p>
-<ol>
-<li>订单相关操作，发送mq消息</li>
-</ol>
-</li>
-<li><p>阿里云OSS</p>
-</li>
-<li><p>阿里云短信服务</p>
-</li>
-<li><p>微信登录&#x2F;支付</p>
-</li>
-<li><p>定时任务</p>
-</li>
-</ol>
-</blockquote>
-<h2 id="3-2-前端技术"><a href="#3-2-前端技术" class="headerlink" title="3.2. 前端技术"></a>3.2. 前端技术</h2><blockquote>
-<ol>
-<li><p>vue</p>
-</li>
-<li><p>Element-ui</p>
-</li>
-<li><p>nuxt</p>
-</li>
-<li><p>npm(此项目建议使用node14及其以下版本)</p>
-</li>
-<li><p>ECharts</p>
-</li>
-</ol>
-</blockquote>
+<h1 id="3-具体代码"><a href="#3-具体代码" class="headerlink" title="3. 具体代码"></a>3. 具体代码</h1><p>第一步：等待编译回调</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;/apk/&#123;mode&#125;&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">jenkinsCompile</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> RobustReq robustReq, <span class="hljs-meta">@PathVariable(&quot;mode&quot;)</span>Integer mode)</span> &#123;<br>        compileRecordService.saveParamAndStartCompile(robustReq.getLiTaskId(), robustReq, mode, <span class="hljs-keyword">new</span> <span class="hljs-title class_">IJenkinsResultCallback</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onResult</span><span class="hljs-params">(String taskId, <span class="hljs-type">boolean</span> isSuccess)</span> &#123;<br>                <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>                    robustService.savRobustParam(taskId, robustReq);<br>                    robustService.noticeInstall(taskId);<br>                &#125;<br>            &#125;<br>        &#125;, TaskTypeEnum.ROBUST_TEST.getTaskCode());<br><br>        <span class="hljs-keyword">return</span> Result.ok();<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>第二步：回调完成，安装APK</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">noticeInstall</span><span class="hljs-params">(String taskId)</span> &#123;<br>        <span class="hljs-keyword">if</span> (taskIdList.isEmpty()) &#123;<br>            exeInstall(taskId);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            taskIdList.add(taskId);<br>        &#125;<br>    &#125;<br><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">exeInstall</span><span class="hljs-params">(String taskId)</span> &#123;<br>      List&lt;Map&lt;String, Object&gt;&gt; envInfoList = getAvaInfoList(rowList);<br><br>      <span class="hljs-comment">// 1~5min</span><br>      <span class="hljs-keyword">while</span> (envInfoList.isEmpty()) &#123;<br>          <span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br>          <span class="hljs-type">int</span> <span class="hljs-variable">delay</span> <span class="hljs-operator">=</span> random.nextInt(<span class="hljs-number">5</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>) + <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>;<br><br>          <span class="hljs-keyword">try</span> &#123;<br>              Thread.sleep(delay);<br>          &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>              e.printStackTrace();<br>          &#125;<br>          envInfoList = getAvaInfoList(rowList);<br>      &#125;<br><br>      Map&lt;String, Object&gt; envInfo = envInfoList.get(<span class="hljs-number">0</span>);<br>      List&lt;String&gt; devicesList = (List&lt;String&gt;) envInfo.get(<span class="hljs-string">&quot;deviceIds&quot;</span>);<br>      <span class="hljs-type">String</span> <span class="hljs-variable">deviceId</span> <span class="hljs-operator">=</span> devicesList.get(<span class="hljs-number">0</span>);<br><br>      <span class="hljs-type">Integer</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> (Integer) envInfo.get(<span class="hljs-string">&quot;id&quot;</span>);<br><br>      <span class="hljs-type">String</span> <span class="hljs-variable">installUrl</span> <span class="hljs-operator">=</span> Constants.Win.ADDRESS + Constants.Common.COLON + Constants.Win.JAVA_PORT + Constants.Common.SEPARATOR + Constants.Win.INSTALL_APK_HMI;<br>      HttpUtil.createPost(installUrl)<br>              .header(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)<br>              .body(JSONUtil.toJsonStr(paramMap))<br>              .execute();<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>第三步：等待另一台服务的响应：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;/callback&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">installCallback</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> InstallResp resp)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">taskId</span> <span class="hljs-operator">=</span> resp.getTaskId();<br><br>        <span class="hljs-keyword">if</span> (resp.isSuccess()) &#123;<br>            robustService.startRobust(taskId, infoMap -&gt; &#123;<br>            &#125;, emitter);<br>            <span class="hljs-keyword">return</span> Result.ok();<br><br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>第四步：执行任务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">startRobust</span><span class="hljs-params">(String taskId, ILiATCallback callback, ObservableEmitter&lt;Boolean&gt; emitter)</span> &#123;<br>        executeTask(runTime, returnNum, liTaskId, taskId);<br><br>        startIntervalGetRate(liTaskId, taskId, emitter);<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeTask</span><span class="hljs-params">(Integer runtime, Integer returnNum, Integer liTaskId, String taskId)</span> &#123;<br>        List&lt;Map&lt;String, Object&gt;&gt; envList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>        Map&lt;String, Object&gt; paramMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br><br><br>        <span class="hljs-type">HttpResponse</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> HttpUtil.createPost(<span class="hljs-string">&quot;xxx&quot;</span>)<br>                .header(<span class="hljs-string">&quot;content-type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)<br>                .header(<span class="hljs-string">&quot;authorization&quot;</span>, Constants.LiAT.AUTHORIZATION)<br>                .body(JSONUtil.toJsonStr(paramMap))<br>                .execute();<br><br>        taskIdList.remove(taskId);<br>        <span class="hljs-keyword">if</span> (!taskIdList.isEmpty()) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">nextTaskId</span> <span class="hljs-operator">=</span> taskIdList.get(<span class="hljs-number">0</span>);<br>            exeInstall(nextTaskId);<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
 
                 
               </div>
@@ -440,15 +333,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  <a href="/categories/Java%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/" class="category-chain-item">Java编程技巧</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%E9%A1%B9%E7%9B%AE/%E5%B0%9A%E5%8C%BB%E9%80%9A/" class="category-chain-item">尚医通</a>
-  
-  
-
   
 
       </span>
@@ -462,7 +348,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%A1%B9%E7%9B%AE/" class="print-no-link">#项目</a>
+        <a href="/tags/Java%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/" class="print-no-link">#Java编程技巧</a>
       
     </div>
   
@@ -474,8 +360,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>尚医通项目学习大纲</div>
-      <div>https://baijianglai.cn/尚医通学习大纲/eba6394c8151/</div>
+      <div>Java编程技巧-并发处理-01</div>
+      <div>https://baijianglai.cn/Java编程技巧-并发处理-01/156a7266de3c/</div>
     </div>
     <div class="license-meta">
       
@@ -487,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月19日</div>
+          <div>2024年2月1日</div>
         </div>
       
       
@@ -519,18 +405,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E5%B0%9A%E5%8C%BB%E9%80%9A-%E7%AE%A1%E7%90%86%E5%91%98%E5%90%8E%E7%AB%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/9511698e604b/" title="尚医通-管理员后端管理系统">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">尚医通-管理员后端管理系统</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B-ThreadLocal/5c8cef3482ea/" title="Java多线程-ThreadLocal">
-                        <span class="hidden-mobile">Java多线程-ThreadLocal</span>
+                      <a href="/leetcode-hot100-%E5%8F%8C%E6%8C%87%E9%92%88/fa7554c1833c/" title="leetcode-hot100-双指针">
+                        <span class="hidden-mobile">leetcode-hot100-双指针</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

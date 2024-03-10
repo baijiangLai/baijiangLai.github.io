@@ -18,14 +18,14 @@
   
     <meta name="description" content="1 Redis实现秒杀优化1.1 秒杀流程1、查询优惠卷 2、判断秒杀库存是否足够 3、查询订单 4、校验是否是一人一单 5、扣减库存 6、创建订单  在流程上，这是同步操作，即：会按照顺序进行执行，但是这样一个一个执行会有一个很大的缺陷：效率很低。那么是否可以提高效率呢？ 可以：使用异步进行优化。 将耗时比较短的逻辑判断放入到redis中，比如是否库存足够，比如是否一人一单，这样的操作，只要这种">
 <meta property="og:type" content="article">
-<meta property="og:title" content="reids-秒杀优化">
-<meta property="og:url" content="https://baijianglai.cn/reids-%E7%A7%92%E6%9D%80%E4%BC%98%E5%8C%96/0872bdbd9172/index.html">
+<meta property="og:title" content="redis-秒杀优化">
+<meta property="og:url" content="https://baijianglai.cn/redis-%E7%A7%92%E6%9D%80%E4%BC%98%E5%8C%96/fb2025be556d/index.html">
 <meta property="og:site_name" content="Lai">
 <meta property="og:description" content="1 Redis实现秒杀优化1.1 秒杀流程1、查询优惠卷 2、判断秒杀库存是否足够 3、查询订单 4、校验是否是一人一单 5、扣减库存 6、创建订单  在流程上，这是同步操作，即：会按照顺序进行执行，但是这样一个一个执行会有一个很大的缺陷：效率很低。那么是否可以提高效率呢？ 可以：使用异步进行优化。 将耗时比较短的逻辑判断放入到redis中，比如是否库存足够，比如是否一人一单，这样的操作，只要这种">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://baijianglai.cn/img/redis/redis.jpeg">
 <meta property="article:published_time" content="2024-03-10T09:18:03.000Z">
-<meta property="article:modified_time" content="2024-03-10T13:09:17.056Z">
+<meta property="article:modified_time" content="2024-03-10T14:41:07.202Z">
 <meta property="article:author" content="Lai Baijiang">
 <meta property="article:tag" content="redis">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>reids-秒杀优化 - Lai</title>
+  <title>redis-秒杀优化 - Lai</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="reids-秒杀优化"></span>
+            <span id="subtitle" data-typed-text="redis-秒杀优化"></span>
           
         </div>
 
@@ -272,7 +272,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">reids-秒杀优化</h1>
+            <h1 id="seo-header">redis-秒杀优化</h1>
             
             
               <div class="markdown-body">
@@ -449,8 +449,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>reids-秒杀优化</div>
-      <div>https://baijianglai.cn/reids-秒杀优化/0872bdbd9172/</div>
+      <div>redis-秒杀优化</div>
+      <div>https://baijianglai.cn/redis-秒杀优化/fb2025be556d/</div>
     </div>
     <div class="license-meta">
       
@@ -494,9 +494,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/reids-%E6%8E%A2%E5%BA%97-%E5%85%B3%E6%B3%A8/1195a257125d/" title="reids-探店&amp;关注">
+                      <a href="/redis-%E6%8E%A2%E5%BA%97-%E5%85%B3%E6%B3%A8/47cab89a5a24/" title="redis-探店&amp;关注">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">reids-探店&amp;关注</span>
+                        <span class="hidden-mobile">redis-探店&amp;关注</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

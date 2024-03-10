@@ -1,0 +1,846 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.png">
+  <link rel="icon" href="/img/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Lai Baijiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 达人探店1.1 分享探店图文1.1.1 发布探店笔记涉及两个数据库表：  tb_blog：探店笔记表，包含笔记中的标题、文字、图片等 tb_blog_comments：其他用户对探店笔记的评价  发布流程：  123456789101112131415161718192021222324@Slf4j@RestController@RequestMapping(&quot;upload&amp;quot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reids-探店&amp;关注">
+<meta property="og:url" content="https://baijianglai.cn/reids-%E6%8E%A2%E5%BA%97-%E5%85%B3%E6%B3%A8/1195a257125d/index.html">
+<meta property="og:site_name" content="Lai">
+<meta property="og:description" content="1 达人探店1.1 分享探店图文1.1.1 发布探店笔记涉及两个数据库表：  tb_blog：探店笔记表，包含笔记中的标题、文字、图片等 tb_blog_comments：其他用户对探店笔记的评价  发布流程：  123456789101112131415161718192021222324@Slf4j@RestController@RequestMapping(&quot;upload&amp;quot">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://baijianglai.cn/img/redis/redis.jpeg">
+<meta property="article:published_time" content="2024-03-10T13:19:57.000Z">
+<meta property="article:modified_time" content="2024-03-10T14:17:19.887Z">
+<meta property="article:author" content="Lai Baijiang">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://baijianglai.cn/img/redis/redis.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>reids-探店&amp;关注 - Lai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"baijianglai.cn","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Lai</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="reids-探店&amp;关注"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-10 21:19" pubdate>
+          2024年3月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          22k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">reids-探店&amp;关注</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-达人探店"><a href="#1-达人探店" class="headerlink" title="1 达人探店"></a>1 达人探店</h1><h2 id="1-1-分享探店图文"><a href="#1-1-分享探店图文" class="headerlink" title="1.1 分享探店图文"></a>1.1 分享探店图文</h2><h3 id="1-1-1-发布探店笔记"><a href="#1-1-1-发布探店笔记" class="headerlink" title="1.1.1 发布探店笔记"></a>1.1.1 发布探店笔记</h3><p>涉及两个数据库表：</p>
+<ul>
+<li>tb_blog：探店笔记表，包含笔记中的标题、文字、图片等</li>
+<li>tb_blog_comments：其他用户对探店笔记的评价</li>
+</ul>
+<p>发布流程：</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/b5533c1860f44bf3956b673ff727a4be.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;upload&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UploadController</span> &#123;<br><br>    <span class="hljs-meta">@PostMapping(&quot;blog&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">uploadImage</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(&quot;file&quot;)</span> MultipartFile image)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 获取原始文件名称</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">originalFilename</span> <span class="hljs-operator">=</span> image.getOriginalFilename();<br>            <span class="hljs-comment">// 生成新文件名</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> createNewFileName(originalFilename);<br>            <span class="hljs-comment">// 保存文件</span><br>            image.transferTo(<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(SystemConstants.IMAGE_UPLOAD_DIR, fileName));<br>            <span class="hljs-comment">// 返回结果</span><br>            log.debug(<span class="hljs-string">&quot;文件上传成功，&#123;&#125;&quot;</span>, fileName);<br>            <span class="hljs-keyword">return</span> Result.ok(fileName);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;文件上传失败&quot;</span>, e);<br>        &#125;<br>    &#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">IMAGE_UPLOAD_DIR</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;xxxx&quot;</span>;<br><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/blog&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BlogController</span> &#123;<br><br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> IBlogService blogService;<br><br>    <span class="hljs-meta">@PostMapping</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">saveBlog</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> Blog blog)</span> &#123;<br>        <span class="hljs-comment">//获取登录用户</span><br>        <span class="hljs-type">UserDTO</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> UserHolder.getUser();<br>        blog.setUpdateTime(user.getId());<br>        <span class="hljs-comment">//保存探店博文</span><br>        blogService.saveBlog(blog);<br>        <span class="hljs-comment">//返回id</span><br>        <span class="hljs-keyword">return</span> Result.ok(blog.getId());<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-1-2-查看探店笔记"><a href="#1-1-2-查看探店笔记" class="headerlink" title="1.1.2 查看探店笔记"></a>1.1.2 查看探店笔记</h3><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/6112d227a59c43dd85cf76245c024656.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;/hot&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryHotBlog</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(value = &quot;current&quot;, defaultValue = &quot;1&quot;)</span> Integer current)</span> &#123;<br>    <span class="hljs-keyword">return</span> blogService.queryHotBlog(current);<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //查看笔记详情页面</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogById</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Long id)</span> &#123;<br>    <span class="hljs-keyword">return</span> blogService.queryBlogById(id);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BlogServiceImpl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ServiceImpl</span>&lt;BlogMapper, Blog&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IBlogService</span> &#123;<br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> IUserService userService;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryHotBlog</span><span class="hljs-params">(Integer current)</span> &#123;<br>        <span class="hljs-comment">// 根据用户查询</span><br>        Page&lt;Blog&gt; page = query()<br>                .orderByDesc(<span class="hljs-string">&quot;liked&quot;</span>)<br>                .page(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Page</span>&lt;&gt;(current, SystemConstants.MAX_PAGE_SIZE));<br>        <span class="hljs-comment">// 获取当前页数据</span><br>        List&lt;Blog&gt; records = page.getRecords();<br>        <span class="hljs-comment">// 查询用户</span><br>        records.forEach(<span class="hljs-built_in">this</span>::queryBlogUser);<br>        <span class="hljs-keyword">return</span> Result.ok(records);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //查看笔记详情页面</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogById</span><span class="hljs-params">(Long id)</span> &#123;<br>        <span class="hljs-comment">// 1.查询blog</span><br>        <span class="hljs-type">Blog</span> <span class="hljs-variable">blog</span> <span class="hljs-operator">=</span> getById(id);<br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == blog) &#123;<br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;笔记不存在!&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 2.查询blog相关的用户</span><br>        queryBlogUser(blog);<br>        <span class="hljs-keyword">return</span> Result.ok(blog);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">queryBlogUser</span><span class="hljs-params">(Blog blog)</span> &#123;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> blog.getUserId();<br>        <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> userService.getById(userId);<br>        blog.setName(user.getNickName());<br>        blog.setIcon(user.getIcon());<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2-点赞功能"><a href="#1-2-点赞功能" class="headerlink" title="1.2 点赞功能"></a>1.2 点赞功能</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;/likes/&#123;id&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogLikes</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Long id)</span> &#123;<br>    <span class="hljs-comment">//修改点赞数量</span><br>    blogService.update().setSql(<span class="hljs-string">&quot;liked = liked +1 &quot;</span>).eq(<span class="hljs-string">&quot;id&quot;</span>,id).update();<br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这样会有一个问题，一个用户可以多次的点赞</p>
+</blockquote>
+<h3 id="1-2-1-修改"><a href="#1-2-1-修改" class="headerlink" title="1.2.1 修改"></a>1.2.1 修改</h3><ol>
+<li><p>给Blog类中添加一个isLike字段，标示是否被当前用户点赞</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@TableField(exist = false)</span><br><span class="hljs-keyword">private</span> Boolean isLike;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改点赞功能，利用Redis的set集合判断是否点赞过，未点赞过则点赞数+1，已点赞过则点赞数-1</p>
+</li>
+<li><p>修改根据id查询Blog的业务，判断当前登录用户是否点赞过，赋值给isLike字段</p>
+</li>
+<li><p>修改分页查询Blog业务，判断当前登录用户是否点赞过，赋值给isLike字段</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PutMapping(&quot;/like/&#123;id&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">likeBlog</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Long id)</span> &#123;<br>    <span class="hljs-comment">// 修改点赞数量 update tb_blog set liked = liked where id = ?</span><br>    <span class="hljs-comment">//blogService.update().setSql(&quot;liked = liked + 1&quot;).eq(&quot;id&quot;, id).update();</span><br>    <span class="hljs-keyword">return</span> blogService.likeBlog(id);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BlogServiceImpl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ServiceImpl</span>&lt;BlogMapper, Blog&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IBlogService</span> &#123;<br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> IUserService userService;<br><br>    <span class="hljs-meta">@Resource</span><br>    StringRedisTemplate stringRedisTemplate;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryHotBlog</span><span class="hljs-params">(Integer current)</span> &#123;<br>        <span class="hljs-comment">// 根据用户查询</span><br>        Page&lt;Blog&gt; page = query()<br>                .orderByDesc(<span class="hljs-string">&quot;liked&quot;</span>)<br>                .page(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Page</span>&lt;&gt;(current, SystemConstants.MAX_PAGE_SIZE));<br>        <span class="hljs-comment">// 获取当前页数据</span><br>        List&lt;Blog&gt; records = page.getRecords();<br>        <span class="hljs-comment">// 查询用户</span><br>        records.forEach(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Consumer</span>&lt;Blog&gt;() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(Blog blog)</span> &#123;<br>                queryBlogUser(blog);<br>                isBlogLiked(blog);<br>            &#125;<br>        &#125;);<br>        <span class="hljs-comment">//records.forEach(this::queryBlogUser);</span><br>        <span class="hljs-keyword">return</span> Result.ok(records);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //查看笔记详情页面</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogById</span><span class="hljs-params">(Long id)</span> &#123;<br>        <span class="hljs-comment">// 1.查询blog</span><br>        <span class="hljs-type">Blog</span> <span class="hljs-variable">blog</span> <span class="hljs-operator">=</span> getById(id);<br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == blog) &#123;<br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;笔记不存在!&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 2.查询blog相关的用户</span><br>        queryBlogUser(blog);<br>        <span class="hljs-comment">// 3.查询blog是否被点赞</span><br>        isBlogLiked(blog);<br>        <span class="hljs-keyword">return</span> Result.ok(blog);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> void</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //当前笔记是否被当前用户点赞</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">isBlogLiked</span><span class="hljs-params">(Blog blog)</span> &#123;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> blog.getId();<br>        <span class="hljs-comment">// 1.获取当前登录用户</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-comment">// 2.判断当前登录用户是否点赞 key  &quot;blog:liked:&quot; + id</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.BLOG_LIKED_KEY + id;<br>        <span class="hljs-type">Boolean</span> <span class="hljs-variable">isMember</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForSet().isMember(key, userId.toString());<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> BooleanUtil.isTrue(isMember);<br>        blog.setIsLike(flag);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> // 点赞</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">likeBlog</span><span class="hljs-params">(Long id)</span> &#123;<br>        <span class="hljs-comment">// 1.获取当前登录用户</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-comment">// 2.判断当前登录用户是否点赞 key  &quot;blog:liked:&quot; + id</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.BLOG_LIKED_KEY + id;<br>        <span class="hljs-type">Boolean</span> <span class="hljs-variable">isMember</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForSet().isMember(key, userId.toString());<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> BooleanUtil.isTrue(isMember);<br><br>        <span class="hljs-keyword">if</span> (!flag) &#123;<br>            <span class="hljs-comment">// 3.如果未点赞，可以点赞</span><br>            <span class="hljs-comment">// 3.1数据库点赞数+1</span><br>            <span class="hljs-comment">// 修改点赞数量 update tb_blog set liked = liked where id = ?</span><br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> update().setSql(<span class="hljs-string">&quot;liked = liked + 1&quot;</span>).eq(<span class="hljs-string">&quot;id&quot;</span>, id).update();<br>            <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>                <span class="hljs-comment">// 3.2保存用户到Redis的set集合</span><br>                stringRedisTemplate.opsForSet().add(key, userId.toString());<br>            &#125;<br><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 4.如果已经点赞，取消点赞</span><br>            <span class="hljs-comment">// 4.1数据库点赞数 -1</span><br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> update().setSql(<span class="hljs-string">&quot;liked = liked - 1&quot;</span>).eq(<span class="hljs-string">&quot;id&quot;</span>, id).update();<br><br>            <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>                <span class="hljs-comment">// 4.2把用户从Redis的set集合移除</span><br>                stringRedisTemplate.opsForSet().remove(key, userId.toString());<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">queryBlogUser</span><span class="hljs-params">(Blog blog)</span> &#123;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> blog.getUserId();<br>        <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> userService.getById(userId);<br>        blog.setName(user.getNickName());<br>        blog.setIcon(user.getIcon());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="1-3-基于List实现点赞用户列表"><a href="#1-3-基于List实现点赞用户列表" class="headerlink" title="1.3 基于List实现点赞用户列表"></a>1.3 基于List实现点赞用户列表</h2><p>在探店笔记的详情页面，应该把给该笔记点赞的人显示出来，比如最早点赞的TOP5，形成点赞排行榜：</p>
+<p>之前的点赞是放到set集合，但是set集合是不能排序的，所以这个时候，咱们可以采用一个可以排序的set集合，就是咱们的sortedSet</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/4e5a3c274c654725b6ad8477171a5c13.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h3 id="1-3-1-List-Set-SortedSet对比"><a href="#1-3-1-List-Set-SortedSet对比" class="headerlink" title="1.3.1 List&#x2F;Set&#x2F;SortedSet对比"></a>1.3.1 List&#x2F;Set&#x2F;SortedSet对比</h3><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/d592308328fc46d5a4b4dfe0159cf0e2.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/c584590a6d3145d4a122928ceb96e99d.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BlogServiceImpl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ServiceImpl</span>&lt;BlogMapper, Blog&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IBlogService</span> &#123;<br>    <span class="hljs-meta">@Resource</span><br>    <span class="hljs-keyword">private</span> IUserService userService;<br><br>    <span class="hljs-meta">@Resource</span><br>    StringRedisTemplate stringRedisTemplate;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryHotBlog</span><span class="hljs-params">(Integer current)</span> &#123;<br>        <span class="hljs-comment">// 根据用户查询</span><br>        Page&lt;Blog&gt; page = query()<br>                .orderByDesc(<span class="hljs-string">&quot;liked&quot;</span>)<br>                .page(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Page</span>&lt;&gt;(current, SystemConstants.MAX_PAGE_SIZE));<br>        <span class="hljs-comment">// 获取当前页数据</span><br>        List&lt;Blog&gt; records = page.getRecords();<br>        <span class="hljs-comment">// 查询用户</span><br>        records.forEach(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Consumer</span>&lt;Blog&gt;() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">accept</span><span class="hljs-params">(Blog blog)</span> &#123;<br>                queryBlogUser(blog);<br>                isBlogLiked(blog);<br>            &#125;<br>        &#125;);<br>        <span class="hljs-comment">//records.forEach(this::queryBlogUser);</span><br>        <span class="hljs-keyword">return</span> Result.ok(records);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //查看笔记详情页面</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogById</span><span class="hljs-params">(Long id)</span> &#123;<br>        <span class="hljs-comment">// 1.查询blog</span><br>        <span class="hljs-type">Blog</span> <span class="hljs-variable">blog</span> <span class="hljs-operator">=</span> getById(id);<br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == blog) &#123;<br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;笔记不存在!&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 2.查询blog相关的用户</span><br>        queryBlogUser(blog);<br>        <span class="hljs-comment">// 3.查询blog是否被点赞</span><br>        isBlogLiked(blog);<br>        <span class="hljs-keyword">return</span> Result.ok(blog);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> void</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //当前笔记是否被当前用户点赞(Set)</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">isBlogLikedSet</span><span class="hljs-params">(Blog blog)</span> &#123;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> blog.getId();<br>        <span class="hljs-comment">// 1.获取当前登录用户</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == userId) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">// 2.判断当前登录用户是否点赞 key  &quot;blog:liked:&quot; + id</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.BLOG_LIKED_KEY + id;<br>        <span class="hljs-type">Boolean</span> <span class="hljs-variable">isMember</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForSet().isMember(key, userId.toString());<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> BooleanUtil.isTrue(isMember);<br>        blog.setIsLike(flag);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> void</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //当前笔记是否被当前用户点赞(SortedSet)</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">isBlogLiked</span><span class="hljs-params">(Blog blog)</span> &#123;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> blog.getId();<br>        <span class="hljs-comment">// 1.获取当前登录用户</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == userId) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">// 2.判断当前登录用户是否点赞 key  &quot;blog:liked:&quot; + id</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.BLOG_LIKED_KEY + id;<br>        <span class="hljs-type">Double</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForZSet().score(key, userId.toString());<br>        blog.setIsLike(<span class="hljs-literal">null</span> != score);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> // 点赞(Set集合)</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">likeBlogSet</span><span class="hljs-params">(Long id)</span> &#123;<br>        <span class="hljs-comment">// 1.获取当前登录用户</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-comment">// 2.判断当前登录用户是否点赞 key  &quot;blog:liked:&quot; + id</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.BLOG_LIKED_KEY + id;<br>        <span class="hljs-type">Boolean</span> <span class="hljs-variable">isMember</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForSet().isMember(key, userId.toString());<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> BooleanUtil.isTrue(isMember);<br><br>        <span class="hljs-keyword">if</span> (!flag) &#123;<br>            <span class="hljs-comment">// 3.如果未点赞，可以点赞</span><br>            <span class="hljs-comment">// 3.1数据库点赞数+1</span><br>            <span class="hljs-comment">// 修改点赞数量 update tb_blog set liked = liked where id = ?</span><br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> update().setSql(<span class="hljs-string">&quot;liked = liked + 1&quot;</span>).eq(<span class="hljs-string">&quot;id&quot;</span>, id).update();<br>            <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>                <span class="hljs-comment">// 3.2保存用户到Redis的set集合</span><br>                stringRedisTemplate.opsForSet().add(key, userId.toString());<br>            &#125;<br><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 4.如果已经点赞，取消点赞</span><br>            <span class="hljs-comment">// 4.1数据库点赞数 -1</span><br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> update().setSql(<span class="hljs-string">&quot;liked = liked - 1&quot;</span>).eq(<span class="hljs-string">&quot;id&quot;</span>, id).update();<br><br>            <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>                <span class="hljs-comment">// 4.2把用户从Redis的set集合移除</span><br>                stringRedisTemplate.opsForSet().remove(key, userId.toString());<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> // 点赞(SortedSet集合)</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">likeBlog</span><span class="hljs-params">(Long id)</span> &#123;<br>        <span class="hljs-comment">// 1.获取当前登录用户</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-comment">// 2.判断当前登录用户是否点赞 key  &quot;blog:liked:&quot; + id</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.BLOG_LIKED_KEY + id;<br>        <span class="hljs-type">Double</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForZSet().score(key, userId.toString());<br><br>        <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == score) &#123;<br>            <span class="hljs-comment">// 3.如果未点赞，可以点赞</span><br>            <span class="hljs-comment">// 3.1数据库点赞数+1</span><br>            <span class="hljs-comment">// 修改点赞数量 update tb_blog set liked = liked where id = ?</span><br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> update().setSql(<span class="hljs-string">&quot;liked = liked + 1&quot;</span>).eq(<span class="hljs-string">&quot;id&quot;</span>, id).update();<br>            <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>                <span class="hljs-comment">// 3.2保存用户到Redis的sortedset集合 zadd key score member</span><br>                stringRedisTemplate.opsForZSet().add(key, userId.toString(), System.currentTimeMillis());<br>            &#125;<br><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 4.如果已经点赞，取消点赞</span><br>            <span class="hljs-comment">// 4.1数据库点赞数 -1</span><br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> update().setSql(<span class="hljs-string">&quot;liked = liked - 1&quot;</span>).eq(<span class="hljs-string">&quot;id&quot;</span>, id).update();<br><br>            <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>                <span class="hljs-comment">// 4.2把用户从Redis的set集合移除</span><br>                stringRedisTemplate.opsForZSet().remove(key, userId.toString());<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">queryBlogUser</span><span class="hljs-params">(Blog blog)</span> &#123;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> blog.getUserId();<br>        <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> userService.getById(userId);<br>        blog.setName(user.getNickName());<br>        blog.setIcon(user.getIcon());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>BlogController.java</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@GetMapping</span>(<span class="hljs-string">&quot;/likes/&#123;id&#125;&quot;</span>)<br>public Result <span class="hljs-built_in">queryBlogLikes</span>(<span class="hljs-variable">@PathVariable</span>(<span class="hljs-string">&quot;id&quot;</span>) Long id) &#123;<br>    <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">blogService</span><span class="hljs-selector-class">.queryBlogLikes</span>(id);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>BlogServiceImpl.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //查询点赞列表</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogLikes</span><span class="hljs-params">(Long id)</span> &#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.BLOG_LIKED_KEY + id;<br>    <span class="hljs-comment">// 1.查询top5的点赞用户 zrange key 0 4</span><br>    Set&lt;String&gt; top5 = stringRedisTemplate.opsForZSet().range(key, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>);<br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == top5 || top5.isEmpty()) &#123;<br>        <span class="hljs-keyword">return</span> Result.ok(Collections.emptyList());<br>    &#125;<br><br>    <span class="hljs-comment">// 2.解析出其中的用户id</span><br>    List&lt;Long&gt; ids = top5.stream().map(Long::valueOf).collect(Collectors.toList());<br><br>    <span class="hljs-comment">// 3.根据用户id查询用户</span><br>    List&lt;UserDTO&gt; userDTOS = userService.listByIds(ids).stream().map(user -&gt; BeanUtil.copyProperties(user, UserDTO.class)).collect(Collectors.toList());<br><br>    <span class="hljs-comment">// 4.返回</span><br>    <span class="hljs-keyword">return</span> Result.ok(userDTOS);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时会发现点赞的顺序是反的，问题就出现在了SQL上<br><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/5eac4ff438384024bbf09f1ea6663725.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>那么此时修改SQL即可解决</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> tb_user <span class="hljs-keyword">WHERE</span> id <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;5&#x27;</span>,<span class="hljs-string">&#x27;1&#x27;</span>) <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> FIELD(id,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 3.根据用户id查询用户</span><br><span class="hljs-comment">//List&lt;UserDTO&gt; userDTOS = userService.listByIds(ids).stream().map(user -&gt; BeanUtil.copyProperties(user, UserDTO.class)).collect(Collectors.toList());</span><br>List&lt;UserDTO&gt; userDTOS = userService.query()<br>        <span class="hljs-comment">// SELECT * FROM tb_user WHERE id IN (&#x27;5&#x27;,&#x27;1&#x27;) ORDER BY FIELD(id,5,1);</span><br>        .in(<span class="hljs-string">&quot;id&quot;</span>, ids)<br>        .last(<span class="hljs-string">&quot;order by field (id,&quot;</span> + idsStr + <span class="hljs-string">&quot;) &quot;</span>).list()<br>        .stream().map(user -&gt; BeanUtil.copyProperties(user, UserDTO.class))<br>        .collect(Collectors.toList());<br><br></code></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h1 id="2-关注列表"><a href="#2-关注列表" class="headerlink" title="2 关注列表"></a>2 关注列表</h1><h2 id="2-1-添加关注"><a href="#2-1-添加关注" class="headerlink" title="2.1 添加关注"></a>2.1 添加关注</h2><p>针对用户的操作：可以对用户进行关注和取消关注功能。</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/ebe0a18a3d604e0a815444f0a591ac1a.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>涉及到数据库表tb_follow：<br><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/d1e397e897934c87818c67b44b717cea.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/follow&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FollowController</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> IFollowService iFollowService;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //关注博主</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@PutMapping(&quot;/&#123;id&#125;/&#123;isFollow&#125;&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">follow</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Long followUserId, <span class="hljs-meta">@PathVariable(&quot;isFollow&quot;)</span> <span class="hljs-type">boolean</span> isFollow)</span> &#123;<br>        <span class="hljs-keyword">return</span> iFollowService.follow(followUserId, isFollow);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //判断是否关注</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@GetMapping(&quot;/or/not/&#123;id&#125;&quot;)</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">isFollow</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Long followUserId)</span> &#123;<br>        <span class="hljs-keyword">return</span> iFollowService.isFollow(followUserId);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FollowServiceImpl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ServiceImpl</span>&lt;FollowMapper, Follow&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IFollowService</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //关注</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">follow</span><span class="hljs-params">(Long followUserId, <span class="hljs-type">boolean</span> isFollow)</span> &#123;<br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-comment">// 1.判断是关注还是取关</span><br>        <span class="hljs-keyword">if</span> (isFollow) &#123;<br>            <span class="hljs-comment">// 2.关注，新增数据</span><br>            <span class="hljs-type">Follow</span> <span class="hljs-variable">follow</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Follow</span>();<br>            follow.setFollowUserId(followUserId);<br>            follow.setUserId(userId);<br>            <span class="hljs-comment">// insert into tb_follow values()</span><br>            save(follow);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 3.取关，删除</span><br>            <span class="hljs-comment">// delete from follow where user_id = ? and follow_user_id = ?</span><br>            LambdaQueryWrapper&lt;Follow&gt; wrapper = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LambdaQueryWrapper</span>&lt;&gt;();<br>            remove(wrapper.eq(Follow::getUserId, userId).eq(Follow::getFollowUserId, followUserId));<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> Result.ok();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@description</span> //判断是否关注</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Result <span class="hljs-title function_">isFollow</span><span class="hljs-params">(Long followUserId)</span> &#123;<br>        <span class="hljs-comment">// 1.获取用户id</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>        <span class="hljs-comment">// 2.查询是否关注 select * from tb_follow where  user_id = ? and follow_user_id = ?</span><br>        <span class="hljs-type">Integer</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> query().eq(<span class="hljs-string">&quot;user_id&quot;</span>, userId).eq(<span class="hljs-string">&quot;follow_user_id&quot;</span>, followUserId).count();<br>        <span class="hljs-keyword">return</span> Result.ok(count &gt; <span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2-共同关注列表"><a href="#2-2-共同关注列表" class="headerlink" title="2.2 共同关注列表"></a>2.2 共同关注列表</h2><p>想要去看共同关注的好友，需要首先进入到这个页面，这个页面会发起两个请求</p>
+<p>1、去查询用户的详情</p>
+<p>2、去查询用户的笔记</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/630737bdbb184d1dac25b2db1d30b4df.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// UserController 根据id查询用户</span><br><span class="hljs-meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryUserById</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Long userId)</span>&#123;<br>	<span class="hljs-comment">// 查询详情</span><br>	<span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> userService.getById(userId);<br>	<span class="hljs-keyword">if</span> (user == <span class="hljs-literal">null</span>) &#123;<br>		<span class="hljs-keyword">return</span> Result.ok();<br>	&#125;<br>	<span class="hljs-type">UserDTO</span> <span class="hljs-variable">userDTO</span> <span class="hljs-operator">=</span> BeanUtil.copyProperties(user, UserDTO.class);<br>	<span class="hljs-comment">// 返回</span><br>	<span class="hljs-keyword">return</span> Result.ok(userDTO);<br>&#125;<br><br><span class="hljs-comment">// BlogController  根据id查询博主的探店笔记</span><br><span class="hljs-meta">@GetMapping(&quot;/of/user&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogByUserId</span><span class="hljs-params">(</span><br><span class="hljs-params">		<span class="hljs-meta">@RequestParam(value = &quot;current&quot;, defaultValue = &quot;1&quot;)</span> Integer current,</span><br><span class="hljs-params">		<span class="hljs-meta">@RequestParam(&quot;id&quot;)</span> Long id)</span> &#123;<br>	<span class="hljs-comment">// 根据用户查询</span><br>	Page&lt;Blog&gt; page = blogService.query()<br>			.eq(<span class="hljs-string">&quot;user_id&quot;</span>, id).page(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Page</span>&lt;&gt;(current, SystemConstants.MAX_PAGE_SIZE));<br>	<span class="hljs-comment">// 获取当前页数据</span><br>	List&lt;Blog&gt; records = page.getRecords();<br>	<span class="hljs-keyword">return</span> Result.ok(records);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/d0cb2e5f62ab4f9c842e40615ec4a283.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>但是此时点击了之后发现共同关注报错，如何去解决共同关注的问题。模拟场景：A关注了B、C，而D关注了C、E，那么对于A和D来说他们的共同关注就是C，在Redis中可以使用set求交集</p>
+<h3 id="2-2-1-修改"><a href="#2-2-1-修改" class="headerlink" title="2.2.1 修改"></a>2.2.1 修改</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //关注</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">follow</span><span class="hljs-params">(Long followUserId, <span class="hljs-type">boolean</span> isFollow)</span> &#123;<br>    <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>    <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.FOLLOW_USER_LIST + userId;<br>    <span class="hljs-comment">// 1.判断是关注还是取关</span><br>    <span class="hljs-keyword">if</span> (isFollow) &#123;<br>        <span class="hljs-comment">// 2.关注，新增数据</span><br>        <span class="hljs-type">Follow</span> <span class="hljs-variable">follow</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Follow</span>();<br>        follow.setFollowUserId(followUserId);<br>        follow.setUserId(userId);<br>        <span class="hljs-comment">// insert into tb_follow values()</span><br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> save(follow);<br><br>        <span class="hljs-comment">// 加入Redis,实现共同关注</span><br>        <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>            <span class="hljs-comment">// 把关注用户的id，加入redis的set集合  sadd userId followUserId</span><br>            stringRedisTemplate.opsForSet().add(key, followUserId.toString());<br>        &#125;<br><br><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 3.取关，删除</span><br>        <span class="hljs-comment">// delete from follow where user_id = ? and follow_user_id = ?</span><br>        LambdaQueryWrapper&lt;Follow&gt; wrapper = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LambdaQueryWrapper</span>&lt;&gt;();<br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> remove(wrapper.eq(Follow::getUserId, userId).eq(Follow::getFollowUserId, followUserId));<br>        <span class="hljs-keyword">if</span> (isSuccess) &#123;<br>            <span class="hljs-comment">// 从Redis中移除,实现取关</span><br>            <span class="hljs-comment">// 把关注用户的id，从redis的set集合中移除  srem userId followUserId</span><br>            stringRedisTemplate.opsForSet().remove(key, followUserId.toString());<br>        &#125;<br><br>    &#125;<br><br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-2-2-共同关注"><a href="#2-2-2-共同关注" class="headerlink" title="2.2.2 共同关注"></a>2.2.2 共同关注</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //查询共同关注</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@GetMapping(&quot;/common/&#123;id&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">followCommons</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;id&quot;)</span> Long id)</span> &#123;<br>    <span class="hljs-keyword">return</span> iFollowService.followCommons(id);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //共同关注</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">followCommons</span><span class="hljs-params">(Long id)</span> &#123;<br>    <span class="hljs-comment">// 1.获取当前用户</span><br>    <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>    <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.FOLLOW_USER_LIST + userId;<br><br>    <span class="hljs-comment">// 目标用户</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">keyFollow</span> <span class="hljs-operator">=</span> RedisConstants.FOLLOW_USER_LIST + id;<br><br>    <span class="hljs-comment">// 2.求交集</span><br>    Set&lt;String&gt; intersect = stringRedisTemplate.opsForSet().intersect(key, keyFollow);<br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == intersect || intersect.isEmpty()) &#123;<br>        <span class="hljs-keyword">return</span> Result.ok(Collections.emptyList());<br>    &#125;<br><br>    <span class="hljs-comment">// 3.解析id集合</span><br>    List&lt;Long&gt; ids = intersect.stream().map(Long::valueOf).collect(Collectors.toList());<br>    List&lt;UserDTO&gt; userDTOS = userService.listByIds(ids)<br>            .stream().map(user -&gt; BeanUtil.copyProperties(user, UserDTO.class)).collect(Collectors.toList());<br><br>    <span class="hljs-comment">// 查询用户</span><br>    <span class="hljs-keyword">return</span> Result.ok(userDTOS);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="2-3-关注用户发布消息-Feed流"><a href="#2-3-关注用户发布消息-Feed流" class="headerlink" title="2.3 关注用户发布消息-Feed流"></a>2.3 关注用户发布消息-Feed流</h2><p>当我们关注了用户后，这个用户发了动态，那么我们应该把这些数据推送给用户，这个需求，其实我们又把他叫做Feed流，关注推送也叫做Feed流，直译为投喂。为用户持续的提供“沉浸式”的体验，通过无限下拉刷新获取新的信息。</p>
+<p>对于传统的模式的内容解锁：我们是需要用户去通过搜索引擎或者是其他的方式去解锁想要看的内容</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/d458c8be7fc34397abc1d78e0179521e.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>对于新型的Feed流的的效果：不需要我们用户再去推送信息，而是系统分析用户到底想要什么，然后直接把内容推送给用户，从而使用户能够更加的节约时间，不用主动去寻找。</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/f68b671793f44d3f93c8ecec5e386ba7.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>Feed流产品有两种常见模式：<br>Timeline：不做内容筛选，简单的按照内容发布时间排序，常用于好友或关注。例如朋友圈</p>
+<p>优点：信息全面，不会有缺失。并且实现也相对简单<br>缺点：信息噪音较多，用户不一定感兴趣，内容获取效率低<br>智能排序：利用智能算法屏蔽掉违规的、用户不感兴趣的内容。推送用户感兴趣信息来吸引用户</p>
+<p>优点：投喂用户感兴趣信息，用户粘度很高，容易沉迷<br>缺点：如果算法不精准，可能起到反作用<br>本例中的个人页面，是基于关注的好友来做Feed流，因此采用Timeline的模式。该模式的实现方案有三种：</p>
+<ul>
+<li>拉模式</li>
+<li>推模式</li>
+<li>推拉结合</li>
+</ul>
+<h3 id="2-3-1-拉模式-读扩散"><a href="#2-3-1-拉模式-读扩散" class="headerlink" title="2.3.1 拉模式-读扩散"></a>2.3.1 拉模式-读扩散</h3><p>该模式的核心含义就是：当张三和李四和王五发了消息后，都会保存在自己的邮箱中，假设赵六要读取信息，那么他会从读取他自己的收件箱，此时系统会从他关注的人群中，把他关注人的信息全部都进行拉取，然后在进行排序</p>
+<p>优点：比较节约空间，因为赵六在读信息时，并没有重复读取，而且读取完之后可以把他的收件箱进行清楚。</p>
+<p>缺点：比较延迟，当用户读取数据时才去关注的人里边去读取数据，假设用户关注了大量的用户，那么此时就会拉取海量的内容，对服务器压力巨大。</p>
+<h3 id="2-3-2-推模式-写扩散"><a href="#2-3-2-推模式-写扩散" class="headerlink" title="2.3.2 推模式-写扩散"></a>2.3.2 推模式-写扩散</h3><p>推模式是没有写邮箱的，当张三写了一个内容，此时会主动的把张三写的内容发送到他的粉丝收件箱中去，假设此时李四再来读取，就不用再去临时拉取了</p>
+<p>优点：时效快，不用临时拉取</p>
+<p>缺点：内存压力大，假设一个大V写信息，很多人关注他， 就会写很多分数据到粉丝那边去</p>
+<h3 id="2-3-3-推拉结合-读写混合"><a href="#2-3-3-推拉结合-读写混合" class="headerlink" title="2.3.3 推拉结合-读写混合"></a>2.3.3 推拉结合-读写混合</h3><p>推拉模式是一个折中的方案，站在发件人这一段，如果是个普通的人，那么我们采用写扩散的方式，直接把数据写入到他的粉丝中去，因为普通的人他的粉丝关注量比较小，所以这样做没有压力，如果是大V，那么他是直接将数据先写入到一份到发件箱里边去，然后再直接写一份到活跃粉丝收件箱里边去，现在站在收件人这端来看，如果是活跃粉丝，那么大V和普通的人发的都会直接写入到自己收件箱里边来，而如果是普通的粉丝，由于他们上线不是很频繁，所以等他们上线时，再从发件箱里边去拉信息。</p>
+<h2 id="2-4-探店推送"><a href="#2-4-探店推送" class="headerlink" title="2.4 探店推送"></a>2.4 探店推送</h2><p>需要实现当关注用户增加一个新的笔记后，能推送到分析收件箱</p>
+<h3 id="2-4-1-分析"><a href="#2-4-1-分析" class="headerlink" title="2.4.1 分析"></a>2.4.1 分析</h3><p>Feed流中的数据会不断更新，所以数据的角标也在变化，因此不能采用传统的分页模式。</p>
+<p>传统的分页在feed流是不适用的，因为我们的数据会随时发生变化。</p>
+<p>假设在t1 时刻，我们去读取第一页，此时page &#x3D; 1 ，size &#x3D; 5 ，那么我们拿到的就是10 ~ 6 这几条记录，假设现在t2时候又发布了一条记录，此时t3 时刻，我们来读取第二页，读取第二页传入的参数是page&#x3D;2 ，size&#x3D;5 ，那么此时读取到的第二页实际上是从6 开始，然后是6~2 ，那么我们就读取到了重复的数据，所以feed流的分页，不能采用原始方案来做。</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/5c2f4b732747435e9d69f031efa7aaa3.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h3 id="2-4-2-Feed流滚动分页"><a href="#2-4-2-Feed流滚动分页" class="headerlink" title="2.4.2 Feed流滚动分页"></a>2.4.2 Feed流滚动分页</h3><p>我们需要记录每次操作的最后一条，然后从这个位置开始去读取数据</p>
+<p>举个例子：我们从t1时刻开始，拿第一页数据，拿到了10~6，然后记录下当前最后一次拿取的记录，就是6，t2时刻发布了新的记录，此时这个11放到最顶上，但是不会影响我们之前记录的6，此时t3时刻来拿第二页，第二页这个时候拿数据，还是从6后一点的5去拿，就拿到了5-1的记录。我们这个地方可以采用sortedSet来做，可以进行范围查询，并且还可以记录当前获取数据时间戳最小值，就可以实现滚动分页了</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/d4bbb4ac74004ec786f746ada0dbbb68.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<blockquote>
+<p>即：在保存完探店笔记后，获得到当前笔记的粉丝，然后把数据推送到粉丝的redis中去。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">saveBlog</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> Blog blog)</span> &#123;<br>    <span class="hljs-keyword">return</span> blogService.saveBlog(blog);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //使用push模式</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">saveBlog</span><span class="hljs-params">(Blog blog)</span> &#123;<br>    <span class="hljs-comment">// 1.获取登录用户</span><br>    <span class="hljs-type">UserDTO</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> UserHolder.getUser();<br><br>    blog.setUserId(user.getId());<br>    <span class="hljs-comment">// 2.保存探店博文</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-variable">isSuccess</span> <span class="hljs-operator">=</span> save(blog);<br>    <span class="hljs-keyword">if</span> (!isSuccess) &#123;<br>        <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;新增笔记失败,请重新发布!&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">// 3.查询笔记作者的所有粉丝</span><br>    <span class="hljs-comment">// select user_id from tb_follow where follow_user_id = ?</span><br>    LambdaQueryWrapper&lt;Follow&gt; wrapper = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LambdaQueryWrapper</span>&lt;&gt;();<br>    wrapper.eq(Follow::getFollowUserId, user.getId());<br>    List&lt;Follow&gt; follows = followService.list(wrapper);<br>    <span class="hljs-comment">// 4.推送笔记id给所有粉丝</span><br>    <span class="hljs-keyword">for</span> (Follow follow : follows) &#123;<br>        <span class="hljs-comment">// 4.1获取粉丝id</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">fansId</span> <span class="hljs-operator">=</span> follow.getUserId();<br>        <span class="hljs-comment">// 4.2推送给粉丝</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.FEED_KEY + fansId;<br>        stringRedisTemplate.opsForZSet().add(key, blog.getId().toString(), System.currentTimeMillis());<br>    &#125;<br><br><br>    <span class="hljs-comment">// 5.返回id</span><br>    <span class="hljs-keyword">return</span> Result.ok(blog.getId());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-5-好有关注页分页查询"><a href="#2-5-好有关注页分页查询" class="headerlink" title="2.5 好有关注页分页查询"></a>2.5 好有关注页分页查询</h2><p>在个人主页的“关注”卡片中，查询并展示推送的Blog信息：</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/f5e417eb93be4b7a931c527cf484dbfa.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>正序：</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/b1c97a920dc74be3b5c527ce4c1c8030.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>倒序：</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/ad6cd28c982b496fb4c91c80a876458f.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>带分数：</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/31c0aa410a2d48b4b3ae54d9da5e971d.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>滚动分页规律：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-comment">-- 第一次</span><br>ZREVRANGEBYSCORE key 设定一个最大值 <span class="hljs-number">0</span> WITHSCORES <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">0</span> 每页展示几条<br><span class="hljs-comment">-- 之后</span><br>ZREVRANGEBYSCORE key 第一条最小的角标 <span class="hljs-number">0</span> WITHSCORES <span class="hljs-keyword">LIMIT</span> 第一页中与最小值相等的元素的个数 每页展示几条<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-5-1-新增实体类"><a href="#2-5-1-新增实体类" class="headerlink" title="2.5.1 新增实体类"></a>2.5.1 新增实体类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ScrollResult</span> &#123;<br>    <span class="hljs-keyword">private</span> List&lt;?&gt; list;<br>    <span class="hljs-keyword">private</span> Long minTime;<br>    <span class="hljs-keyword">private</span> Integer offset;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;/of/follow&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogOfFollow</span><span class="hljs-params">(</span><br><span class="hljs-params">    <span class="hljs-meta">@RequestParam(&quot;lastId&quot;)</span> Long max, <span class="hljs-meta">@RequestParam(value = &quot;offset&quot;, defaultValue = &quot;0&quot;)</span> Integer offset)</span>&#123;<br>    <span class="hljs-keyword">return</span> blogService.queryBlogOfFollow(max, offset);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //滚动分页查询关注列表</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryBlogOfFollow</span><span class="hljs-params">(Long max, Integer offset)</span> &#123;<br>    <span class="hljs-comment">// 1.查询当前用户</span><br>    <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>    <span class="hljs-comment">// 2.找到收件箱</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.FEED_KEY + userId;<br><br>    <span class="hljs-comment">// 滚动分页查询(第一次查询)</span><br>    <span class="hljs-comment">//ZREVRANGEBYSCORE z1 1000 0 WITHSCORES LIMIT 0 5</span><br>    Set&lt;ZSetOperations.TypedTuple&lt;String&gt;&gt; set = stringRedisTemplate<br>            .opsForZSet()<br>            .reverseRangeByScoreWithScores(key, <span class="hljs-number">0</span>, max, offset, <span class="hljs-number">2L</span>);<br><br>    <span class="hljs-comment">// 3.非空判断</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == set || set.isEmpty()) &#123;<br>        <span class="hljs-keyword">return</span> Result.ok();<br>    &#125;<br><br>    <span class="hljs-comment">// 4.解析收件箱的数据:blogId,minTime(时间戳),offset</span><br>    ArrayList&lt;Long&gt; ids = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(set.size());<br>    <span class="hljs-type">long</span> <span class="hljs-variable">minTime</span> <span class="hljs-operator">=</span> Long.MAX_VALUE;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">off</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span> (ZSetOperations.TypedTuple&lt;String&gt; tuple : set) &#123;<br>        <span class="hljs-comment">// 4.1获取id</span><br>        ids.add(Long.valueOf(tuple.getValue()));<br>        <span class="hljs-comment">// 4.2 获取分数(时间戳)</span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">time</span> <span class="hljs-operator">=</span> tuple.getScore().longValue();<br>        <span class="hljs-keyword">if</span> (time == minTime) &#123;<br>            off++;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            minTime = minTime &lt; tuple.getScore().longValue() ? minTime : time;<br>            off = <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">//List&lt;Blog&gt; blogs = listByIds(ids);</span><br>    <span class="hljs-comment">// select * from tb_blog where id in () order by field(id,max,min)</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">joinStr</span> <span class="hljs-operator">=</span> StrUtil.join(<span class="hljs-string">&quot;,&quot;</span>, ids);<br>    <span class="hljs-comment">// 5.根据blogId查询blog</span><br>    List&lt;Blog&gt; blogs = query().in(<span class="hljs-string">&quot;id&quot;</span>, ids).last(<span class="hljs-string">&quot;order by field(id,&quot;</span> + joinStr + <span class="hljs-string">&quot;)&quot;</span>).list();<br>    <span class="hljs-keyword">for</span> (Blog blog : blogs) &#123;<br>        <span class="hljs-comment">// 2.查询blog相关的用户</span><br>        queryBlogUser(blog);<br>        <span class="hljs-comment">// 3.查询blog是否被点赞</span><br>        isBlogLiked(blog);<br>    &#125;<br><br>    <span class="hljs-comment">// 6.封装并返回</span><br>    <span class="hljs-type">ScrollResult</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ScrollResult</span>();<br>    result.setList(blogs);<br>    result.setOffset(off);<br>    result.setMinTime(minTime);<br><br>    <span class="hljs-keyword">return</span> Result.ok(result);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/redis/" class="category-chain-item">redis</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/redis/" class="print-no-link">#redis</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>reids-探店&amp;关注</div>
+      <div>https://baijianglai.cn/reids-探店-关注/1195a257125d/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Lai Baijiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/reids-%E9%99%84%E8%BF%91-%E7%AD%BE%E5%88%B0-UV/48795d05e96e/" title="reids-附近&amp;签到&amp;UV">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">reids-附近&amp;签到&amp;UV</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/reids-%E7%A7%92%E6%9D%80%E4%BC%98%E5%8C%96/0872bdbd9172/" title="reids-秒杀优化">
+                        <span class="hidden-mobile">reids-秒杀优化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,763 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/icon.png">
+  <link rel="icon" href="/img/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Lai Baijiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 附近的店铺1.1 GEO数据结构的基本用法GEO就是Geolocation的简写形式，代表地理坐标。Redis在3.2版本中加入了对GEO的支持，允许存储地理坐标信息，帮助我们根据经纬度来检索数据。常见的命令有：  GEOADD：添加一个地理空间信息，包含：经度（longitude）、纬度（latitude）、值（member） GEODIST：计算指定的两个点之间的距离并返回 GEOHASH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="reids-附近&amp;签到&amp;UV">
+<meta property="og:url" content="https://baijianglai.cn/reids-%E9%99%84%E8%BF%91-%E7%AD%BE%E5%88%B0-UV/48795d05e96e/index.html">
+<meta property="og:site_name" content="Lai">
+<meta property="og:description" content="1 附近的店铺1.1 GEO数据结构的基本用法GEO就是Geolocation的简写形式，代表地理坐标。Redis在3.2版本中加入了对GEO的支持，允许存储地理坐标信息，帮助我们根据经纬度来检索数据。常见的命令有：  GEOADD：添加一个地理空间信息，包含：经度（longitude）、纬度（latitude）、值（member） GEODIST：计算指定的两个点之间的距离并返回 GEOHASH">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://baijianglai.cn/img/redis/redis.jpeg">
+<meta property="article:published_time" content="2024-03-10T14:18:14.000Z">
+<meta property="article:modified_time" content="2024-03-10T14:38:49.122Z">
+<meta property="article:author" content="Lai Baijiang">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://baijianglai.cn/img/redis/redis.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>reids-附近&amp;签到&amp;UV - Lai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"baijianglai.cn","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Lai</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="reids-附近&amp;签到&amp;UV"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-10 22:18" pubdate>
+          2024年3月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">reids-附近&amp;签到&amp;UV</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-附近的店铺"><a href="#1-附近的店铺" class="headerlink" title="1 附近的店铺"></a>1 附近的店铺</h1><h2 id="1-1-GEO数据结构的基本用法"><a href="#1-1-GEO数据结构的基本用法" class="headerlink" title="1.1 GEO数据结构的基本用法"></a>1.1 GEO数据结构的基本用法</h2><p>GEO就是Geolocation的简写形式，代表地理坐标。Redis在3.2版本中加入了对GEO的支持，允许存储地理坐标信息，帮助我们根据经纬度来检索数据。常见的命令有：</p>
+<ul>
+<li>GEOADD：添加一个地理空间信息，包含：经度（longitude）、纬度（latitude）、值（member）</li>
+<li>GEODIST：计算指定的两个点之间的距离并返回</li>
+<li>GEOHASH：将指定member的坐标转为hash字符串形式并返回</li>
+<li>GEOPOS：返回指定member的坐标</li>
+<li>GEORADIUS：指定圆心、半径，找到该圆内包含的所有member，并按照与圆心之间的距离排序后返回。6.以后已废弃</li>
+<li>GEOSEARCH：在指定范围内搜索member，并按照与指定点之间的距离排序后返回。范围可以是圆形或矩形。6.2.新功能</li>
+<li>GEOSEARCHSTORE：与GEOSEARCH功能一致，不过可以把结果存储到一个指定的key。 6.2.新功能。</li>
+</ul>
+<h2 id="1-2-附近的店铺导入GEO"><a href="#1-2-附近的店铺导入GEO" class="headerlink" title="1.2 附近的店铺导入GEO"></a>1.2 附近的店铺导入GEO</h2><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/b618a38193b04d26bb0dea88c35d4d32.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>分析shop对应的数据库表，发现有一个typeId字段，表明是什么类型的，那么此时可以根据这个字段将店铺进行分组</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/a55fc0a0189144c39835a8e5dd7f0a89.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">void</span> <span class="hljs-title function_">loadShopData</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-comment">// 1.查询店铺信息</span><br>    List&lt;Shop&gt; list = shopService.list();<br>    <span class="hljs-comment">// 2.把店铺按照typeId分组，typeId一样的分一组</span><br>    Map&lt;Long, List&lt;Shop&gt;&gt; map = list.stream().collect(Collectors.groupingBy(Shop::getTypeId));<br><br>    <span class="hljs-comment">// 3.分批完成写入Redis</span><br>    Set&lt;Map.Entry&lt;Long, List&lt;Shop&gt;&gt;&gt; entries = map.entrySet();<br>    <span class="hljs-keyword">for</span> (Map.Entry&lt;Long, List&lt;Shop&gt;&gt; entry : entries) &#123;<br>        <span class="hljs-comment">// 3.1获取typeId</span><br>        <span class="hljs-type">Long</span> <span class="hljs-variable">typeId</span> <span class="hljs-operator">=</span> entry.getKey();<br><br>        <span class="hljs-comment">// 3.2获取同类型的店铺的集合</span><br>        List&lt;Shop&gt; value = entry.getValue();<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.SHOP_GEO_KEY + typeId;<br>        <span class="hljs-comment">// 3.3 写入Redis</span><br><br>        <span class="hljs-comment">// 方法一：打开shop实体类集合，一条店铺一条店铺添加(比较慢)</span><br>        <span class="hljs-comment">/*for (Shop shop : value) &#123;</span><br><span class="hljs-comment">            stringRedisTemplate.opsForGeo().add(key, new Point(shop.getX(), shop.getY()), shop.getId().toString());</span><br><span class="hljs-comment">        &#125;*/</span><br><br>        <span class="hljs-comment">// 方法二：locations</span><br>        List&lt;RedisGeoCommands.GeoLocation&lt;String&gt;&gt; locations = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(value.size());<br>        <span class="hljs-keyword">for</span> (Shop shop : value) &#123;<br>            locations.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">RedisGeoCommands</span>.GeoLocation&lt;&gt;(shop.getId().toString(),<br>                    <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>(shop.getX(), shop.getY())));<br>        &#125;<br>        stringRedisTemplate.opsForGeo().add(key, locations);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-获取附近的店铺"><a href="#1-3-获取附近的店铺" class="headerlink" title="1.3 获取附近的店铺"></a>1.3 获取附近的店铺</h2><p>SpringDataRedis的2.3.9版本并不支持Redis 6.2提供的GEOSEARCH命令，因此我们需要提示其版本，修改自己的POM</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.data<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.6.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.lettuce<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>lettuce-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>6.1.6.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;/of/type&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryShopByType</span><span class="hljs-params">(</span><br><span class="hljs-params">        <span class="hljs-meta">@RequestParam(&quot;typeId&quot;)</span> Integer typeId,</span><br><span class="hljs-params">        <span class="hljs-meta">@RequestParam(value = &quot;current&quot;, defaultValue = &quot;1&quot;)</span> Integer current,</span><br><span class="hljs-params">        <span class="hljs-meta">@RequestParam(value = &quot;x&quot;, required = false)</span> Double x,</span><br><span class="hljs-params">        <span class="hljs-meta">@RequestParam(value = &quot;y&quot;, required = false)</span> Double y</span><br><span class="hljs-params">)</span> &#123;<br>   <span class="hljs-keyword">return</span> shopService.queryShopByType(typeId, current, x, y);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> void</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //根据商铺类型分页查询商铺信息(加入坐标)</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryShopByType</span><span class="hljs-params">(Integer typeId, Integer current, Double x, Double y)</span> &#123;<br>    <span class="hljs-comment">// 1.判断是否需要根据坐标查询，如果需要再按照坐标</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == x || <span class="hljs-literal">null</span> == y) &#123;<br>        <span class="hljs-comment">// 根据类型分页查询</span><br>        Page&lt;Shop&gt; page = query()<br>                .eq(<span class="hljs-string">&quot;type_id&quot;</span>, typeId)<br>                .page(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Page</span>&lt;&gt;(current, SystemConstants.DEFAULT_PAGE_SIZE));<br>        <span class="hljs-comment">// 返回数据</span><br>        <span class="hljs-keyword">return</span> Result.ok(page.getRecords());<br>    &#125;<br><br>    <span class="hljs-comment">// 2.分页参数的计算</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 当前页的起始数据是第几条</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">from</span> <span class="hljs-operator">=</span> (current - <span class="hljs-number">1</span>) * SystemConstants.DEFAULT_PAGE_SIZE;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 当前页的结束数据是第几条</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> current * SystemConstants.DEFAULT_PAGE_SIZE;<br><br>    <span class="hljs-comment">// 3.查询redis，按照距离排序和分页 结果 shopId ,distance</span><br>    <span class="hljs-comment">// GEOSEARCH g1 FROMLONLAT 116.397904 39.909005 BYRADIUS 10 km WITHDIST</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.SHOP_GEO_KEY + typeId;<br>    GeoResults&lt;RedisGeoCommands.GeoLocation&lt;String&gt;&gt; results = stringRedisTemplate.opsForGeo()<br>            .search(key,<br>                    GeoReference.fromCoordinate(x, y),<br>                    <span class="hljs-keyword">new</span> <span class="hljs-title class_">Distance</span>(RedisConstants.GEO_DISTANT),<br>                    RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs().includeDistance().limit(end)<br>            );<br><br>    <span class="hljs-comment">// 4.解析shopId</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == results) &#123;<br>        <span class="hljs-keyword">return</span> Result.ok(Collections.emptyList());<br>    &#125;<br>    List&lt;GeoResult&lt;RedisGeoCommands.GeoLocation&lt;String&gt;&gt;&gt; list = results.getContent();<br>    ArrayList&lt;Long&gt; shopIds = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(list.size());<br>    Map&lt;String, Distance&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(list.size());<br>    <span class="hljs-comment">// 4.1 截取从from 到 end</span><br>    list.stream().skip(from).forEach(result -&gt; &#123;<br>        <span class="hljs-comment">// 4.2获取店铺id</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">shopIdStr</span> <span class="hljs-operator">=</span> result.getContent().getName();<br>        shopIds.add(Long.valueOf(shopIdStr));<br><br>        <span class="hljs-comment">// 4.3获取距离</span><br>        <span class="hljs-type">Distance</span> <span class="hljs-variable">distance</span> <span class="hljs-operator">=</span> result.getDistance();<br><br>        map.put(shopIdStr, distance);<br>    &#125;);<br><br>    <span class="hljs-comment">// 5.根据id查询shop</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">joinStr</span> <span class="hljs-operator">=</span> StrUtil.join(<span class="hljs-string">&quot;,&quot;</span>, shopIds);<br>    List&lt;Shop&gt; shops = query().in(<span class="hljs-string">&quot;id&quot;</span>, shopIds).last(<span class="hljs-string">&quot;order by field(id,&quot;</span> + joinStr + <span class="hljs-string">&quot;)&quot;</span>).list();<br>    <span class="hljs-keyword">for</span> (Shop shop : shops) &#123;<br>        shop.setDistance(map.get(shop.getId().toString()).getValue());<br>    &#125;<br><br>    <span class="hljs-comment">// 6.返回</span><br>    <span class="hljs-keyword">return</span> Result.ok(shops);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>但是此时测试的时候，到最后的时候向下拉却报错了</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/6856c73dfc814521b58138fc3dfa70a7.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>原因分析：</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/5abe1713f1ef422780ff4cae726be1e2.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>最后在截取的时候，跳过之后就没有任何值了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> void</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //根据商铺类型分页查询商铺信息(加入坐标)</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">queryShopByType</span><span class="hljs-params">(Integer typeId, Integer current, Double x, Double y)</span> &#123;<br>    <span class="hljs-comment">// 1.判断是否需要根据坐标查询，如果需要再按照坐标</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == x || <span class="hljs-literal">null</span> == y) &#123;<br>        <span class="hljs-comment">// 根据类型分页查询</span><br>        Page&lt;Shop&gt; page = query()<br>                .eq(<span class="hljs-string">&quot;type_id&quot;</span>, typeId)<br>                .page(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Page</span>&lt;&gt;(current, SystemConstants.DEFAULT_PAGE_SIZE));<br>        <span class="hljs-comment">// 返回数据</span><br>        <span class="hljs-keyword">return</span> Result.ok(page.getRecords());<br>    &#125;<br><br>    <span class="hljs-comment">// 2.分页参数的计算</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 当前页的起始数据是第几条</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">from</span> <span class="hljs-operator">=</span> (current - <span class="hljs-number">1</span>) * SystemConstants.DEFAULT_PAGE_SIZE;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 当前页的结束数据是第几条</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> current * SystemConstants.DEFAULT_PAGE_SIZE;<br><br>    <span class="hljs-comment">// 3.查询redis，按照距离排序和分页 结果 shopId ,distance</span><br>    <span class="hljs-comment">// GEOSEARCH g1 FROMLONLAT 116.397904 39.909005 BYRADIUS 10 km WITHDIST</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.SHOP_GEO_KEY + typeId;<br>    GeoResults&lt;RedisGeoCommands.GeoLocation&lt;String&gt;&gt; results = stringRedisTemplate.opsForGeo()<br>            .search(key,<br>                    GeoReference.fromCoordinate(x, y),<br>                    <span class="hljs-keyword">new</span> <span class="hljs-title class_">Distance</span>(RedisConstants.GEO_DISTANT),<br>                    RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs().includeDistance().limit(end)<br>            );<br><br>    <span class="hljs-comment">// 4.解析shopId</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == results) &#123;<br>        <span class="hljs-keyword">return</span> Result.ok(Collections.emptyList());<br>    &#125;<br>    List&lt;GeoResult&lt;RedisGeoCommands.GeoLocation&lt;String&gt;&gt;&gt; list = results.getContent();<br>    ArrayList&lt;Long&gt; shopIds = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(list.size());<br>    <span class="hljs-keyword">if</span>(list.size () &lt;= from) &#123;<br>      <span class="hljs-comment">// 已经没有下一页了</span><br>      <span class="hljs-keyword">return</span> Result.ok(Collections.emptyList());<br>    &#125;<br>    Map&lt;String, Distance&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;(list.size());<br>    <span class="hljs-comment">// 4.1 截取从from 到 end</span><br>    list.stream().skip(from).forEach(result -&gt; &#123;<br>        <span class="hljs-comment">// 4.2获取店铺id</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">shopIdStr</span> <span class="hljs-operator">=</span> result.getContent().getName();<br>        shopIds.add(Long.valueOf(shopIdStr));<br><br>        <span class="hljs-comment">// 4.3获取距离</span><br>        <span class="hljs-type">Distance</span> <span class="hljs-variable">distance</span> <span class="hljs-operator">=</span> result.getDistance();<br><br>        map.put(shopIdStr, distance);<br>    &#125;);<br><br>    <span class="hljs-comment">// 5.根据id查询shop</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">joinStr</span> <span class="hljs-operator">=</span> StrUtil.join(<span class="hljs-string">&quot;,&quot;</span>, shopIds);<br>    List&lt;Shop&gt; shops = query().in(<span class="hljs-string">&quot;id&quot;</span>, shopIds).last(<span class="hljs-string">&quot;order by field(id,&quot;</span> + joinStr + <span class="hljs-string">&quot;)&quot;</span>).list();<br>    <span class="hljs-keyword">for</span> (Shop shop : shops) &#123;<br>        shop.setDistance(map.get(shop.getId().toString()).getValue());<br>    &#125;<br><br>    <span class="hljs-comment">// 6.返回</span><br>    <span class="hljs-keyword">return</span> Result.ok(shops);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-签到"><a href="#2-签到" class="headerlink" title="2 签到"></a>2 签到</h1><h2 id="2-1-MySQL实现签到"><a href="#2-1-MySQL实现签到" class="headerlink" title="2.1 MySQL实现签到"></a>2.1 MySQL实现签到</h2><p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/8e553025f3df4520a2cc7d1339f1d409.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>缺点：</p>
+<p>用户一次签到，就是一条记录，假如有1000万用户，平均每人每年签到次数为10次，则这张表一年的数据量为 1亿条</p>
+<p>每签到一次需要使用（8 + 8 + 1 + 1 + 3 + 1）共22 字节的内存，一个月则最多需要600多字节</p>
+<h2 id="2-2-优化"><a href="#2-2-优化" class="headerlink" title="2.2 优化"></a>2.2 优化</h2><p>我们按月来统计用户签到信息，签到记录为1，未签到则记录为0.</p>
+<p>把每一个bit位对应当月的每一天，形成了映射关系。用0和1标示业务状态，这种思路就称为位图（BitMap）。这样我们就用极小的空间，来实现了大量数据的表示。</p>
+<p>Redis中是利用string类型数据结构实现BitMap，因此最大上限是512M，转换为bit则是 232个bit位。</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/Redis/e35598cef7e547e8ab05eae512c65f0d.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>BitMap的操作命令有：</p>
+<ul>
+<li>SETBIT：向指定位置（offset）存入一个0或1,从0开始</li>
+<li>GETBIT ：获取指定位置（offset）的bit值</li>
+<li>BITCOUNT ：统计BitMap中值为1的bit位的数量</li>
+<li>BITFIELD ：操作（查询、修改、自增）BitMap中bit数组中的指定位置（offset）的值</li>
+<li>BITFIELD_RO ：获取BitMap中bit数组，并以十进制形式返回</li>
+<li>BITOP ：将多个BitMap的结果做位运算（与 、或、异或）</li>
+<li>BITPOS ：查找bit数组中指定范围内第一个0或1出现的位置</li>
+</ul>
+<p>那么，如何完成用户签到？</p>
+<p>思路：我们可以把年和月作为bitMap的key，然后保存到一个bitMap中，每次签到就到对应的位上把数字从0变成1，只要对应是1，就表明说明这一天已经签到了，反之则没有签到。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;/sign&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">sign</span><span class="hljs-params">()</span>&#123;<br>  <span class="hljs-keyword">return</span> userService.sign();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //签到</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">sign</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-comment">// 1.获取当前登录用户</span><br>    <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>    <span class="hljs-comment">// 2.获取日期</span><br>    <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> LocalDateTime.now();<br>    <span class="hljs-type">String</span> <span class="hljs-variable">keySuffix</span> <span class="hljs-operator">=</span> now.format(DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;:yyyyMM&quot;</span>));<br><br>    <span class="hljs-comment">// 3.拼接key</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.USER_SIGN_KEY + userId + keySuffix;<br><br>    <span class="hljs-comment">// 4.获取今天是本月的第几天</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">dayOfMonth</span> <span class="hljs-operator">=</span> now.getDayOfMonth();<br><br>    <span class="hljs-comment">// 5.写入Redis SETBIT key offset 1</span><br>    stringRedisTemplate.opsForValue().setBit(key, dayOfMonth - <span class="hljs-number">1</span>, <span class="hljs-literal">true</span>);<br><br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3-统计连续签到"><a href="#2-3-统计连续签到" class="headerlink" title="2.3 统计连续签到"></a>2.3 统计连续签到</h2><p><strong>问题1：</strong>什么叫做连续签到天数？<br>从最后一次签到开始向前统计，直到遇到第一次未签到为止，计算总的签到次数，就是连续签到天数。</p>
+<p>Java逻辑代码：获得当前这个月的最后一次签到数据，定义一个计数器，然后不停的向前统计，直到获得第一个非0的数字即可，每得到一个非0的数字计数器+1，直到遍历完所有的数据，就可以获得当前月的签到总天数了</p>
+<p><strong>问题2：</strong>如何得到本月到今天为止的所有签到数据？</p>
+<p>BITFIELD key GET u[dayOfMonth] 0</p>
+<p>假设今天是10号，那么我们就可以从当前月的第一天开始，获得到当前这一天的位数，是10号，那么就是10位，去拿这段时间的数据，就能拿到所有的数据了，那么这10天里边签到了多少次呢？统计有多少个1即可。</p>
+<p><strong>问题3：</strong>如何从后向前遍历每个bit位？</p>
+<p>注意：bitMap返回的数据是10进制，哪假如说返回一个数字8，那么我哪儿知道到底哪些是0，哪些是1呢？我们只需要让得到的10进制数字和1做与运算就可以了，因为1只有遇见1 才是1，其他数字都是0 ，我们把签到结果和1进行与操作，每与一次，就把签到结果向右移动一位，依次内推，我们就能完成逐个遍历的效果了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;/sign/count&quot;)</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">signCount</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> userService.signCount();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> com.hmdp.dto.Result</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@description</span> //合计签到总数</span><br><span class="hljs-comment"> **/</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">signCount</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-comment">// 1.获取当前登录用户</span><br>    <span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> UserHolder.getUser().getId();<br>    <span class="hljs-comment">// 2.获取日期</span><br>    <span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> LocalDateTime.now();<br>    <span class="hljs-type">String</span> <span class="hljs-variable">keySuffix</span> <span class="hljs-operator">=</span> now.format(DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;:yyyyMM&quot;</span>));<br><br>    <span class="hljs-comment">// 3.拼接key</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> RedisConstants.USER_SIGN_KEY + userId + keySuffix;<br><br>    <span class="hljs-comment">// 4.获取今天是本月的第几天</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">dayOfMonth</span> <span class="hljs-operator">=</span> now.getDayOfMonth();<br><br>    <span class="hljs-comment">// 5.获取本月截至今天为止所有的签到记录，返回的是一个十进制的数字</span><br>    <span class="hljs-comment">// BITFIELD bm1 GET u2 0</span><br>    List&lt;Long&gt; results = stringRedisTemplate.opsForValue().bitField(<br>            key, BitFieldSubCommands.create()<br>                    .get(BitFieldSubCommands.BitFieldType.unsigned(dayOfMonth))<br>                    .valueAt(<span class="hljs-number">0</span>)<br>    );<br><br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == results || results.isEmpty()) &#123;<br>        <span class="hljs-comment">// 没有任何签到结果</span><br>        <span class="hljs-keyword">return</span> Result.ok(<span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-type">Long</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> results.get(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> == num || <span class="hljs-number">0</span> == num) &#123;<br>        <span class="hljs-keyword">return</span> Result.ok(<span class="hljs-number">0</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 6.循环遍历</span><br>    <span class="hljs-comment">// 计数器</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">calCount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>        <span class="hljs-comment">// 7.让这个数字与1做与运算，得到数字的最后一个bit位</span><br>        <span class="hljs-keyword">if</span> ((num &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-comment">// 判断这个bit位是否为0，如果为0说明未签到，结束</span><br>            <span class="hljs-keyword">break</span>;<br><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 如果不为0，说明已签到，计数器 + 1</span><br>            calCount++;<br>        &#125;<br><br><br>        <span class="hljs-comment">// 把数字(无符号)右移一位，抛弃最后一个bit位，继续下一个bit位</span><br>        num = (num &gt;&gt;&gt; <span class="hljs-number">1</span>);<br><br>    &#125;<br><br><br>    <span class="hljs-keyword">return</span> Result.ok(calCount);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-UV统计"><a href="#3-UV统计" class="headerlink" title="3 UV统计"></a>3 UV统计</h1><h2 id="3-1-UV统计的基本思路"><a href="#3-1-UV统计的基本思路" class="headerlink" title="3.1 UV统计的基本思路"></a>3.1 UV统计的基本思路</h2><ul>
+<li>UV：全称Unique Visitor，也叫独立访客量，是指通过互联网访问、浏览这个网页的自然人。1天内同一个用户多次访问该网站，只记录1次。</li>
+<li>PV：全称Page View，也叫页面访问量或点击量，用户每访问网站的一个页面，记录1次PV，用户多次打开页面，则记录多次PV。往往用来衡量网站的流量。</li>
+</ul>
+<p>UV统计在服务端做会比较麻烦，因为要判断该用户是否已经统计过了，需要将统计过的用户信息保存。但是如果每个访问的用户都保存到Redis中，数据量会非常恐怖，那怎么处理呢？</p>
+<p>Hyperloglog(HLL)是从Loglog算法派生的概率算法，用于确定非常大的集合的基数，而不需要存储其所有值。相关算法原理大家可以参考：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903785744056333#heading-0">Hyperloglog算法</a></p>
+<p>Redis中的HLL是基于string结构实现的，单个HLL的内存永远小于16kb，内存占用低的令人发指！作为代价，其测量结果是概率性的，有小于0.81％的误差。不过对于UV统计来说，这完全可以忽略。</p>
+<h2 id="3-2-HypeLogLog实现统计"><a href="#3-2-HypeLogLog实现统计" class="headerlink" title="3.2 HypeLogLog实现统计"></a>3.2 HypeLogLog实现统计</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testHyperLog</span><span class="hljs-params">()</span> &#123;<br>    String[] values = <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[<span class="hljs-number">1000</span>];<br>    <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000000</span>; i++) &#123;<br>        j = i % <span class="hljs-number">1000</span>;<br>        values[j] = <span class="hljs-string">&quot;user_&quot;</span> + i;<br>        <span class="hljs-keyword">if</span> (j == <span class="hljs-number">999</span>) &#123;<br>            <span class="hljs-comment">// 发送到Redis</span><br>            stringRedisTemplate.opsForHyperLogLog().add(<span class="hljs-string">&quot;hl&quot;</span>, values);<br><br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 统计数量</span><br>    <span class="hljs-type">Long</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForHyperLogLog().size(<span class="hljs-string">&quot;hl&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;统计的总数是：&quot;</span> + count);<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>计算出来统计的总数是997593</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/redis/" class="category-chain-item">redis</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/redis/" class="print-no-link">#redis</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>reids-附近&amp;签到&amp;UV</div>
+      <div>https://baijianglai.cn/reids-附近-签到-UV/48795d05e96e/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Lai Baijiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/reids-%E6%8E%A2%E5%BA%97-%E5%85%B3%E6%B3%A8/1195a257125d/" title="reids-探店&amp;关注">
+                        <span class="hidden-mobile">reids-探店&amp;关注</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -223,24 +223,18 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/reids-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/62a2e5871819/" target="_self">
-          <img src="/img/redis/redis.jpeg" srcset="/img/loading.gif" lazyload alt="reids-分布式锁">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
+    <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/reids-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/62a2e5871819/" target="_self">
-          reids-分布式锁
+        <a href="/JUC-03-%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9E%8B%E4%B9%8B%E7%AE%A1%E7%A8%8B/3d1ad634835b/" target="_self">
+          JUC-03-共享模型之管程
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/reids-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/62a2e5871819/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/JUC-03-%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9E%8B%E4%B9%8B%E7%AE%A1%E7%A8%8B/3d1ad634835b/" target="_self">
         <div>
-          1 分布式锁在之前分析过，集群模式下的一人一单存在问题，其根源就在锁监视器上。因此需要一个分布式锁，满足分布式系统或集群模式下多进程可见并且互斥的锁。 核心思想：让大家都使用同一把锁，只要大家使用的是同一把锁，那么我们就能锁住线程，不让线程进行，让程序串行执行。  1.1 分布式要求 可见性：多个线程都能看到相同的结果，注意：这个地方说的可见性并不是并发编程中指的内存可见性，只是说多个进程之间都能
+          1. 共享带来的问题12345678910111213141516171819202122232425@Slf4jpublic class CodeTest &#123;    static int count=0;    public static void main(String[] args) throws InterruptedException &#123;        Thread
         </div>
       </a>
 
@@ -248,38 +242,97 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-25 10:10" pubdate>
-              2024-02-25
+            <time datetime="2024-04-24 15:49" pubdate>
+              2024-04-24
             </time>
           </div>
         
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/redis/" class="category-chain-item">redis</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/redis/">#redis</a>
+              <a href="/tags/JUC/">#JUC</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/JUC-02-Java%E7%BA%BF%E7%A8%8B/6f24c74f93c5/" target="_self">
+          JUC-02-Java线程
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/JUC-02-Java%E7%BA%BF%E7%A8%8B/6f24c74f93c5/" target="_self">
+        <div>
+          1. 创建线程1.1 直接使用Thread123456789// 构造方法的参数是给线程指定名字，，推荐给线程起个名字Thread t1 = new Thread(&quot;t1&quot;) &#123;	@Override 	// run 方法内实现了要执行的任务 	public void run() &#123; 		log.debug(&quot;hello&quot;); 	&#125
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-04-24 10:45" pubdate>
+              2024-04-24
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JUC/">#JUC</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/JUC-01-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/1825fe04ebc7/" target="_self">
+          JUC-01-进程与线程
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/JUC-01-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/1825fe04ebc7/" target="_self">
+        <div>
+          1. 进程 程序由指令和数据组成，但这些指令要运行，数据要读写，就必须将指令加载至 CPU，数据加载至内存。在指令运行过程中还需要用到磁盘、网络等设备。进程就是用来加载指令、管理内存、管理 IO 的。 当一个程序被运行，从磁盘加载这个程序的代码至内存，这时就开启了一个进程。 进程就可以视为程序的一个实例。大部分程序可以同时运行多个实例进程（例如记事本、画图、浏览器等），也有的程序只能启动一个实例进
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-04-17 15:34" pubdate>
+              2024-04-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JUC/">#JUC</a>
             
           </div>
         
@@ -291,23 +344,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/reids-%E4%BC%98%E6%83%A0%E5%88%B8%E7%A7%92%E6%9D%80/92ed990d85c4/" target="_self">
-          <img src="/img/redis/redis.jpeg" srcset="/img/loading.gif" lazyload alt="reids-优惠券秒杀">
+        <a href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8B%E5%8A%A1/2ff047cb81fb/" target="_self">
+          <img src="/img/spring/spring.png" srcset="/img/loading.gif" lazyload alt="spring基础知识-事务">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/reids-%E4%BC%98%E6%83%A0%E5%88%B8%E7%A7%92%E6%9D%80/92ed990d85c4/" target="_self">
-          reids-优惠券秒杀
+        <a href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8B%E5%8A%A1/2ff047cb81fb/" target="_self">
+          spring基础知识-事务
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/reids-%E4%BC%98%E6%83%A0%E5%88%B8%E7%A7%92%E6%9D%80/92ed990d85c4/" target="_self">
+      <a class="index-excerpt " href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E4%BA%8B%E5%8A%A1/2ff047cb81fb/" target="_self">
         <div>
-          0 目录 1 全局ID生成器1.1 背景使用数据库自增ID会存在两个问题：  id的规律性太明显（如果我们的id具有太明显的规则，用户或者说商业对手很容易猜测出来我们的一些敏感信息，比如商城在一天时间内，卖出了多少单，这明显不合适） 受单表数据量的限制（随着我们商城规模越来越大，mysql的单表的容量不宜超过500W，数据量过大之后，我们要进行拆库拆表，但拆分表了之后，他们从逻辑上讲他们是同一张表
+          1 事务 事务是数据库操作最基本单位，要么都成功，要么都失败。  事务四个特性ACID：原子性，一致性，隔离性，持久性。  Spring事务管理有两种方式：编程式事务管理 和 声明式事务管理，一般使用声明式事务管理，底层使用AOP原理。  声明式事务管理有两种方式：基于xml配置方式 和 基于注解方式，一般使用注解方式。  Spring事务管理提供了一个接口，叫做事务管理器，这个接口针对不同的框架
         </div>
       </a>
 
@@ -315,8 +368,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-25 10:09" pubdate>
-              2024-02-25
+            <time datetime="2024-04-13 15:40" pubdate>
+              2024-04-13
             </time>
           </div>
         
@@ -331,7 +384,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/redis/" class="category-chain-item">redis</a>
+  <a href="/categories/spring/" class="category-chain-item">spring</a>
   
   
 
@@ -346,7 +399,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/redis/">#redis</a>
+              <a href="/tags/spring/">#spring</a>
             
           </div>
         
@@ -358,23 +411,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/mybatis-%E7%BC%93%E5%AD%98-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B-%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/2990250b4e00/" target="_self">
-          <img src="/img/mybatis/mybatis.png" srcset="/img/loading.gif" lazyload alt="mybatis-缓存&amp;逆向工程&amp;分页插件">
+        <a href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-AOP/a8d960500940/" target="_self">
+          <img src="/img/spring/spring.png" srcset="/img/loading.gif" lazyload alt="spring基础知识-AOP">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/mybatis-%E7%BC%93%E5%AD%98-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B-%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/2990250b4e00/" target="_self">
-          mybatis-缓存&amp;逆向工程&amp;分页插件
+        <a href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-AOP/a8d960500940/" target="_self">
+          spring基础知识-AOP
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/mybatis-%E7%BC%93%E5%AD%98-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B-%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/2990250b4e00/" target="_self">
+      <a class="index-excerpt " href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-AOP/a8d960500940/" target="_self">
         <div>
-          1 缓存1.1 一级缓存 是默认开启的 是SqlSession级别的，通过同一个SqlSession查询的数据会被缓存，下次查询相同的数据，就会从缓存中直接获取，不会从数据库重新访问。  1.1.1 一级缓存失效 不同的SqlSession对应不同的一级缓存 同一个SqlSession但是查询条件不同 同一个SqlSession两次查询期间执行了任何一次增删改操作 同一个SqlSession两次查
+          1 原理 面向切面编程，利用 AOP 可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。通俗来说就是在不修改代码的情况下添加新的功能。  底层通过动态代理来实现：  第一种：有接口的情况，使用JDK动态代理：创建接口实现类的代理对象。 第二种：无接口的情况，使用CGLIB动态代理：创建当前类子类的代理对象。    JDK动态代理 通
         </div>
       </a>
 
@@ -382,8 +435,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-20 21:59" pubdate>
-              2024-02-20
+            <time datetime="2024-04-13 15:40" pubdate>
+              2024-04-13
             </time>
           </div>
         
@@ -398,7 +451,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/mybatis/" class="category-chain-item">mybatis</a>
+  <a href="/categories/spring/" class="category-chain-item">spring</a>
   
   
 
@@ -413,7 +466,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/mybatis/">#mybatis</a>
+              <a href="/tags/spring/">#spring</a>
             
           </div>
         
@@ -425,23 +478,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/mybatis-%E5%8A%A8%E6%80%81SQL/127465e25950/" target="_self">
-          <img src="/img/mybatis/mybatis.png" srcset="/img/loading.gif" lazyload alt="mybatis-动态SQL">
+        <a href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-IOC/245be0057711/" target="_self">
+          <img src="/img/spring/spring.png" srcset="/img/loading.gif" lazyload alt="spring基础知识-IOC">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/mybatis-%E5%8A%A8%E6%80%81SQL/127465e25950/" target="_self">
-          mybatis-动态SQL
+        <a href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-IOC/245be0057711/" target="_self">
+          spring基础知识-IOC
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/mybatis-%E5%8A%A8%E6%80%81SQL/127465e25950/" target="_self">
+      <a class="index-excerpt " href="/spring%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-IOC/245be0057711/" target="_self">
         <div>
-          Mybatis框架的动态SQL技术是一种根据特定条件动态拼装SQL语句的功能，它存在的意义是为了解决 拼接SQL语句字符串时的痛点问题。  1 ifif标签可通过test属性的表达式进行判断，若表达式的结果为true，则标签中的内容会执行；反之标签中 的内容不会执行 12345678910111213&lt;!--List&lt;Emp&gt; getEmpListByMoreTJ(Emp em
+          1 Spring概述 Spring 是轻量级的开源的 JavaEE 框架  Spring 有两个核心部分：IOC 和 AOP。  IOC：控制反转，把创建对象过程交给 Spring 进行管理 AOP：面向切面，不修改源代码进行功能增强   Spring 特点 ：  方便解耦，简化开发 Aop 编程支持 方便程序测试 方便和其他框架进行整合 方便进行事务操作 降低 API 开发难度    2 IOC
         </div>
       </a>
 
@@ -449,8 +502,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-20 21:47" pubdate>
-              2024-02-20
+            <time datetime="2024-04-13 15:40" pubdate>
+              2024-04-13
             </time>
           </div>
         
@@ -465,7 +518,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/mybatis/" class="category-chain-item">mybatis</a>
+  <a href="/categories/spring/" class="category-chain-item">spring</a>
   
   
 
@@ -480,7 +533,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/mybatis/">#mybatis</a>
+              <a href="/tags/spring/">#spring</a>
             
           </div>
         
@@ -492,23 +545,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/mybatis-%E7%89%B9%E6%AE%8ASQL%E6%89%A7%E8%A1%8C-%E8%87%AA%E5%AE%9A%E4%B9%89resultMap/7c02110b378d/" target="_self">
-          <img src="/img/mybatis/mybatis.png" srcset="/img/loading.gif" lazyload alt="mybatis-特殊SQL执行&amp;自定义resultMap">
+        <a href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-04/016cd1d7bfed/" target="_self">
+          <img src="/img/springcloud/springcloud.png" srcset="/img/loading.gif" lazyload alt="springcloud微服务技术栈-04">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/mybatis-%E7%89%B9%E6%AE%8ASQL%E6%89%A7%E8%A1%8C-%E8%87%AA%E5%AE%9A%E4%B9%89resultMap/7c02110b378d/" target="_self">
-          mybatis-特殊SQL执行&amp;自定义resultMap
+        <a href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-04/016cd1d7bfed/" target="_self">
+          springcloud微服务技术栈-04
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/mybatis-%E7%89%B9%E6%AE%8ASQL%E6%89%A7%E8%A1%8C-%E8%87%AA%E5%AE%9A%E4%B9%89resultMap/7c02110b378d/" target="_self">
+      <a class="index-excerpt " href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-04/016cd1d7bfed/" target="_self">
         <div>
-          1 特殊SQL1.1 模糊查询在SQL语句中，使用like关键字进行查询 推荐使用  ${}   concat   “%”#{}”%”    1.2 批量删除由于#{}会自动添加””，因此在批量删除的时候使用${}  1.3 动态设置表名 1.4 获取自增主键 注： 在标签中，  使用userGeneratedKeys表示当前添加功能使用自增的主键 使用keyProperty表示将添加的数据自增主
+          
         </div>
       </a>
 
@@ -516,8 +569,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-20 21:02" pubdate>
-              2024-02-20
+            <time datetime="2024-03-16 17:08" pubdate>
+              2024-03-16
             </time>
           </div>
         
@@ -532,7 +585,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/mybatis/" class="category-chain-item">mybatis</a>
+  <a href="/categories/springcloud/" class="category-chain-item">springcloud</a>
   
   
 
@@ -547,7 +600,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/mybatis/">#mybatis</a>
+              <a href="/tags/springcloud/">#springcloud</a>
             
           </div>
         
@@ -559,23 +612,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/mybatis-%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96-%E6%9F%A5%E8%AF%A2/ce8dcd6d1259/" target="_self">
-          <img src="/img/mybatis/mybatis.png" srcset="/img/loading.gif" lazyload alt="mybatis-参数获取&amp;查询">
+        <a href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-03/a8ff326633d6/" target="_self">
+          <img src="/img/springcloud/springcloud.png" srcset="/img/loading.gif" lazyload alt="springcloud微服务技术栈-03">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/mybatis-%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96-%E6%9F%A5%E8%AF%A2/ce8dcd6d1259/" target="_self">
-          mybatis-参数获取&amp;查询
+        <a href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-03/a8ff326633d6/" target="_self">
+          springcloud微服务技术栈-03
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/mybatis-%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96-%E6%9F%A5%E8%AF%A2/ce8dcd6d1259/" target="_self">
+      <a class="index-excerpt " href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-03/a8ff326633d6/" target="_self">
         <div>
-          0 目录 1 参数获取MyBatis获取参数值的两种方式：${}和#{} ${}的本质就是字符串拼接，**#{}的本质就是占位符赋值** ${}使用字符串拼接的方式拼接sql，若为字符串类型或日期类型的字段进行赋值时，需要手动加单引号； 但是#{}使用占位符赋值的方式拼接sql，此时为字符串类型或日期类型的字段进行赋值时，可以自动添加单引号。 1.1 单个字面量若mapper接口中的方法参数为单个
+          
         </div>
       </a>
 
@@ -583,8 +636,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-19 21:49" pubdate>
-              2024-02-19
+            <time datetime="2024-03-16 17:08" pubdate>
+              2024-03-16
             </time>
           </div>
         
@@ -599,7 +652,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/mybatis/" class="category-chain-item">mybatis</a>
+  <a href="/categories/springcloud/" class="category-chain-item">springcloud</a>
   
   
 
@@ -614,7 +667,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/mybatis/">#mybatis</a>
+              <a href="/tags/springcloud/">#springcloud</a>
             
           </div>
         
@@ -626,23 +679,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/mybatis-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/64bafa7e8456/" target="_self">
-          <img src="/img/mybatis/mybatis.png" srcset="/img/loading.gif" lazyload alt="mybatis-环境搭建">
+        <a href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-02/2a83262f3ef9/" target="_self">
+          <img src="/img/springcloud/springcloud.png" srcset="/img/loading.gif" lazyload alt="springcloud微服务技术栈-02">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/mybatis-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/64bafa7e8456/" target="_self">
-          mybatis-环境搭建
+        <a href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-02/2a83262f3ef9/" target="_self">
+          springcloud微服务技术栈-02
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/mybatis-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/64bafa7e8456/" target="_self">
+      <a class="index-excerpt " href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-02/2a83262f3ef9/" target="_self">
         <div>
-          0 目录 1 Maven工程 设置打包方式 1234&lt;groupId&gt;com.xxxx.xxx&lt;/groupId&gt;&lt;artifactId&gt;MyBatis&lt;/artifactId&gt;&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;&lt;packaging&gt;jar&lt;/packaging&gt;  引入依赖
+          
         </div>
       </a>
 
@@ -650,8 +703,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-19 20:39" pubdate>
-              2024-02-19
+            <time datetime="2024-03-16 17:08" pubdate>
+              2024-03-16
             </time>
           </div>
         
@@ -666,7 +719,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/mybatis/" class="category-chain-item">mybatis</a>
+  <a href="/categories/springcloud/" class="category-chain-item">springcloud</a>
   
   
 
@@ -681,7 +734,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/mybatis/">#mybatis</a>
+              <a href="/tags/springcloud/">#springcloud</a>
             
           </div>
         
@@ -693,23 +746,23 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/redis-%E7%BC%93%E5%AD%98/22e726666a0f/" target="_self">
-          <img src="/img/redis/redis.jpeg" srcset="/img/loading.gif" lazyload alt="redis-缓存">
+        <a href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-01/f0aa2e2b38d0/" target="_self">
+          <img src="/img/springcloud/springcloud.png" srcset="/img/loading.gif" lazyload alt="springclou微服务技术栈-01">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/redis-%E7%BC%93%E5%AD%98/22e726666a0f/" target="_self">
-          redis-缓存
+        <a href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-01/f0aa2e2b38d0/" target="_self">
+          springclou微服务技术栈-01
         </a>
       </h2>
 
       
-      <a class="index-excerpt " href="/redis-%E7%BC%93%E5%AD%98/22e726666a0f/" target="_self">
+      <a class="index-excerpt " href="/springclou%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E6%A0%88-01/f0aa2e2b38d0/" target="_self">
         <div>
-          0 目录 1 什么是缓存缓存就是数据交换的缓冲区（称作Cache），是存储数据的临时地方，一般读写性能较高 1.1 作用 降低后端负载 提高读写效率，降低响应时间  1.2 成本 数据一致性成本 代码维护成本 运维成本  2 添加Redis缓存  即：在客户端和数据库之间加一层redis，这样就可以减轻数据库的压力。  3 缓存更新策略 3.1 具体业务场景 低一致性需求：使用内存淘汰机制。例如店
+          1 微服务认识 SpringCloud ！&#x3D; 微服务  1.1 如何学 核心思想是拆分，把大的业务模块划分成多个小的模块，每个模块叫服务。多个服务形成了服务集群。 服务集群多了之后，各个服务之间的调用关系会很复杂，需要靠注册中心管理。 同理，随着服务集群的增多，配置文件也不断增长需要配置中心来管理(实现配置的热更新)。 用户访问组件需要经过网关，其作用主要是：身份验证、路由规则、负载均衡
         </div>
       </a>
 
@@ -717,8 +770,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-18 20:40" pubdate>
-              2024-02-18
+            <time datetime="2024-03-16 17:07" pubdate>
+              2024-03-16
             </time>
           </div>
         
@@ -733,7 +786,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/redis/" class="category-chain-item">redis</a>
+  <a href="/categories/springcloud/" class="category-chain-item">springcloud</a>
   
   
 
@@ -748,141 +801,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/redis/">#redis</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/redis-%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95/6c096f110ba0/" target="_self">
-          <img src="/img/redis/redis.jpeg" srcset="/img/loading.gif" lazyload alt="redis-短信验证登录">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/redis-%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95/6c096f110ba0/" target="_self">
-          redis-短信验证登录
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/redis-%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95/6c096f110ba0/" target="_self">
-        <div>
-          0 目录 1 基于session实现登录1.1 发送短信验证码 即：将生成的验证码保存到session中 12345678910111213141516@Overridepublic Result sendCode(String phone, HttpSession session) &#123;    //1.校验手机号    if(RegexUtils.isPhoneInvalid(phone
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-18 20:12" pubdate>
-              2024-02-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/redis/" class="category-chain-item">redis</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/redis/">#redis</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/redis-%E5%9F%BA%E7%A1%80/be1ba4ac3a84/" target="_self">
-          <img src="/img/redis/redis.jpeg" srcset="/img/loading.gif" lazyload alt="redis-基础">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/redis-%E5%9F%BA%E7%A1%80/be1ba4ac3a84/" target="_self">
-          redis-基础
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="/redis-%E5%9F%BA%E7%A1%80/be1ba4ac3a84/" target="_self">
-        <div>
-          0 目录 1 NoSQL和SQLSQL：传统关系型数据库是结构化数据，每一张表都有严格的约束信息：字段名、字段数据类型、字段约束等等信息，插入的数据必须遵守这些约束 NoSQL：NoSql对数据库格式没有严格约束，往往形式松散，自由。可以是key-value,可以是文档，或者图格式  2 认识Redis特征：  键值（key-value）型，value支持多种不同数据结构，功能丰富 单线程，每个命
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-02-02 20:36" pubdate>
-              2024-02-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/redis/" class="category-chain-item">redis</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/redis/">#redis</a>
+              <a href="/tags/springcloud/">#springcloud</a>
             
           </div>
         
@@ -894,7 +813,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

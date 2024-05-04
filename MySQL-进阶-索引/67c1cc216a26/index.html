@@ -735,7 +735,7 @@
 <h3 id="8-5-3-示例"><a href="#8-5-3-示例" class="headerlink" title="8.5.3 示例"></a>8.5.3 示例</h3><p>为tb_user表的email字段，建立长度为5<strong>【5指查询的字段的长度，并不是表内前5个的数据】</strong>的前缀索引。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> index idx_email_5 <span class="hljs-keyword">on</span> tb_user(email(<span class="hljs-number">5</span>)) ;<br></code></pre></td></tr></table></figure>
 
-<p>查询’<a href="mailto:&#x63;&#x61;&#111;&#99;&#x61;&#x6f;&#54;&#54;&#54;&#x40;&#113;&#113;&#x2e;&#99;&#111;&#109;">&#x63;&#x61;&#111;&#99;&#x61;&#x6f;&#54;&#54;&#54;&#x40;&#113;&#113;&#x2e;&#99;&#111;&#109;</a>’ ，<strong>【在这里，索引会根据长度为5进行查询，即查询caoca】</strong>看看是否使用到我们为它建的前缀索引</p>
+<p>查询’<a href="mailto:&#x63;&#x61;&#111;&#99;&#x61;&#x6f;&#x36;&#x36;&#54;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#109;">&#x63;&#x61;&#111;&#99;&#x61;&#x6f;&#x36;&#x36;&#54;&#x40;&#x71;&#x71;&#46;&#99;&#x6f;&#109;</a>’ ，<strong>【在这里，索引会根据长度为5进行查询，即查询caoca】</strong>看看是否使用到我们为它建的前缀索引</p>
 <p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/MySQL/8296044054c14a2068fd15901b0fa1a7.png" srcset="/img/loading.gif" lazyload alt="image-20230416213245736"></p>
 <p>前缀索引的查询流程</p>
 <p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/MySQL/88e73c179fc43ea2e54de3689bff4d1c.png" srcset="/img/loading.gif" lazyload alt="image-20230416213433677"></p>

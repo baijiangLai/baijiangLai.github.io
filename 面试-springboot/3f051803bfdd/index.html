@@ -16,21 +16,31 @@
   <meta name="author" content="Lai Baijiang">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="面试-spring系列">
-<meta property="og:url" content="https://baijianglai.cn/%E9%9D%A2%E8%AF%95-spring%E7%B3%BB%E5%88%97/6b21e99ac714/index.html">
+    <meta name="description" content="1. 自动装配原理 在Spring Boot项目中的引导类上有一个注解@SpringBootApplication，这个注解是对三个注解进行了封装，分别是：  @SpringBootConfiguration： 该注解与 @Configuration 注解作用相同，用来声明当前也是一个配置类。 @EnableAutoConfiguration： SpringBoot实现自动化配置的核心注解。 @C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试-springboot">
+<meta property="og:url" content="https://baijianglai.cn/%E9%9D%A2%E8%AF%95-springboot/3f051803bfdd/index.html">
 <meta property="og:site_name" content="Lai">
+<meta property="og:description" content="1. 自动装配原理 在Spring Boot项目中的引导类上有一个注解@SpringBootApplication，这个注解是对三个注解进行了封装，分别是：  @SpringBootConfiguration： 该注解与 @Configuration 注解作用相同，用来声明当前也是一个配置类。 @EnableAutoConfiguration： SpringBoot实现自动化配置的核心注解。 @C">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-03T06:19:50.000Z">
-<meta property="article:modified_time" content="2024-05-03T06:19:50.469Z">
+<meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161645158.png">
+<meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161706815.png">
+<meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161731984.png">
+<meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161755696.png">
+<meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161810267.png">
+<meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625162133471.png">
+<meta property="article:published_time" content="2024-05-10T05:56:59.000Z">
+<meta property="article:modified_time" content="2024-06-25T08:21:47.678Z">
 <meta property="article:author" content="Lai Baijiang">
+<meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161645158.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>面试-spring系列 - Lai</title>
+  <title>面试-springboot - Lai</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="面试-spring系列"></span>
+            <span id="subtitle" data-typed-text="面试-springboot"></span>
           
         </div>
 
@@ -207,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-03 14:19" pubdate>
-          2024年5月3日 下午
+        <time datetime="2024-05-10 13:56" pubdate>
+          2024年5月10日 下午
         </time>
       </span>
     
@@ -219,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          501 字
         
       </span>
     
@@ -230,7 +240,7 @@
         
         
         
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -267,12 +277,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">面试-spring系列</h1>
+            <h1 id="seo-header">面试-springboot</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="1-自动装配原理"><a href="#1-自动装配原理" class="headerlink" title="1. 自动装配原理"></a>1. 自动装配原理</h1><ul>
+<li><p>在Spring Boot项目中的引导类上有一个注解<code>@SpringBootApplication</code>，这个注解是对三个注解进行了封装，分别是：</p>
+<ul>
+<li><code>@SpringBootConfiguration</code>： 该注解与 <code>@Configuration </code>注解作用相同，用来声明当前也是一个配置类。</li>
+<li><code>@EnableAutoConfiguration</code>： SpringBoot实现自动化配置的核心注解。</li>
+<li><code>@ComponentScan</code>： 组件扫描，默认扫描当前引导类所在包及其子包。</li>
+</ul>
+</li>
+<li><p>其中<code>@EnableAutoConfiguration</code>是实现自动化配置的核心注解。 该注解通过<code>@Import</code>注解导入对应的配置选择器。</p>
+<p>内部就是读取了该项目和该项目引用的Jar包的的classpath路径下<code>META-INF/spring.factories</code>文件中的所配置的类的全类名。 在这些配置类中所定义的Bean会根据条件注解所指定的条件来决定是否需要将其导入到Spring容器中。</p>
+</li>
+<li><p>条件判断会有像<code>@ConditionalOnClass</code>这样的注解，判断是否有对应的class文件，如果有则加载该类，把这个配置类的所有的Bean放入spring容器中使用。</p>
+</li>
+</ul>
+<p>图解：</p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161645158.png" srcset="/img/loading.gif" lazyload alt="image-20240625161645158"></p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161706815.png" srcset="/img/loading.gif" lazyload alt="image-20240625161706815"></p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161731984.png" srcset="/img/loading.gif" lazyload alt="image-20240625161731984"></p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161755696.png" srcset="/img/loading.gif" lazyload alt="image-20240625161755696"></p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625161810267.png" srcset="/img/loading.gif" lazyload alt="image-20240625161810267"></p>
+<p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625162133471.png" srcset="/img/loading.gif" lazyload alt="image-20240625162133471"></p>
+
                 
               </div>
             
@@ -280,6 +311,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9D%A2%E8%AF%95/" class="print-no-link">#面试</a>
+      
+    </div>
   
 </div>
 
@@ -289,8 +327,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>面试-spring系列</div>
-      <div>https://baijianglai.cn/面试-spring系列/6b21e99ac714/</div>
+      <div>面试-springboot</div>
+      <div>https://baijianglai.cn/面试-springboot/3f051803bfdd/</div>
     </div>
     <div class="license-meta">
       
@@ -302,7 +340,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月3日</div>
+          <div>2024年5月10日</div>
         </div>
       
       
@@ -334,9 +372,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E9%9D%A2%E8%AF%95-RabbitMQ/6a1379042a62/" title="面试-RabbitMQ">
+                      <a href="/%E9%9D%A2%E8%AF%95-docker/6301b1c74a21/" title="面试-docker">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">面试-RabbitMQ</span>
+                        <span class="hidden-mobile">面试-docker</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -344,8 +382,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/%E9%9D%A2%E8%AF%95-MySQL/ac030fe2dab2/" title="面试-MySQL">
-                        <span class="hidden-mobile">面试-MySQL</span>
+                      <a href="/%E9%9D%A2%E8%AF%95-mybatis/e0edc956392f/" title="面试-mybatis">
+                        <span class="hidden-mobile">面试-mybatis</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

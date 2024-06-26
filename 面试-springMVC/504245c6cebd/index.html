@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625160225356.png">
 <meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240625160316088.png">
 <meta property="article:published_time" content="2024-05-10T05:56:46.000Z">
-<meta property="article:modified_time" content="2024-06-25T08:05:27.359Z">
+<meta property="article:modified_time" content="2024-06-26T07:31:25.164Z">
 <meta property="article:author" content="Lai Baijiang">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          816 字
+          3.8k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          2 分钟
+          9 分钟
         
       </span>
     
@@ -301,6 +301,82 @@
 <li>HandlerAdapter经过适配调用具体的处理器（Handler&#x2F;Controller）</li>
 <li>方法上添加了@ResponseBody</li>
 <li>通过HttpMessageConverter来返回结果转换为JSON并响应</li>
+</ul>
+<h1 id="2-过滤器和拦截器的区别"><a href="#2-过滤器和拦截器的区别" class="headerlink" title="2. 过滤器和拦截器的区别"></a>2. 过滤器和拦截器的区别</h1><ul>
+<li>过滤器适用于所有Web应用的通用处理，而拦截器则更适用于特定Web框架的业务逻辑处理。</li>
+</ul>
+<h2 id="2-1-工作层次"><a href="#2-1-工作层次" class="headerlink" title="2.1 工作层次"></a>2.1 工作层次</h2><ul>
+<li><p><strong>过滤器（Filter）</strong>：</p>
+<ul>
+<li><p>工作在Web容器（如Tomcat）层面，属于Servlet规范的一部分。</p>
+</li>
+<li><p>主要作用是对进入Servlet容器的请求和响应进行预处理和后处理，可以过滤和修改请求和响应内容。</p>
+</li>
+<li><p>通常用于实现一些通用的功能，如日志记录、编码设置、安全检查等。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>拦截器（Interceptor）</strong>：</p>
+<ul>
+<li>工作在框架（如Spring MVC）层面，不属于Servlet规范的一部分。</li>
+<li>主要作用是对进入控制器（Controller）之前和之后的处理，可以拦截方法的调用。</li>
+<li>常用于实现与业务逻辑紧密相关的功能，如用户认证、权限检查、事务管理等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-实现方式"><a href="#2-2-实现方式" class="headerlink" title="2.2 实现方式"></a>2.2 实现方式</h2><ul>
+<li><p><strong>过滤器（Filter）</strong>：</p>
+<ul>
+<li><p>需要实现 <code>javax.servlet.Filter</code> 接口。</p>
+</li>
+<li><p>通过配置 <code>web.xml</code> 文件或使用注解（如 <code>@WebFilter</code>）来注册和映射过滤器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> javax.servlet.*;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebFilter;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-meta">@WebFilter(urlPatterns = &quot;/*&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyFilter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Filter</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">(FilterConfig filterConfig)</span> <span class="hljs-keyword">throws</span> ServletException &#123;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">doFilter</span><span class="hljs-params">(ServletRequest request, ServletResponse response, FilterChain chain)</span><br>            <span class="hljs-keyword">throws</span> IOException, ServletException &#123;<br>        <span class="hljs-comment">// 预处理</span><br>        System.out.println(<span class="hljs-string">&quot;Filter is called before request processing&quot;</span>);<br>        <br>        chain.doFilter(request, response); <span class="hljs-comment">// 调用下一个过滤器或目标资源</span><br>        <br>        <span class="hljs-comment">// 后处理</span><br>        System.out.println(<span class="hljs-string">&quot;Filter is called after request processing&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>拦截器（Interceptor）</strong>：</p>
+<ul>
+<li><p>在Spring MVC中，拦截器需要实现 <code>HandlerInterceptor</code> 接口或继承其实现类。</p>
+</li>
+<li><p>通过配置类或XML文件来注册和映射拦截器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.springframework.web.servlet.HandlerInterceptor;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><span class="hljs-keyword">import</span> org.springframework.web.servlet.ModelAndView;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">HandlerInterceptor</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">preHandle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 预处理</span><br>        System.out.println(<span class="hljs-string">&quot;Interceptor is called before request processing&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 返回true，继续执行；返回false，中断执行</span><br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">postHandle</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 后处理</span><br>        System.out.println(<span class="hljs-string">&quot;Interceptor is called after request processing&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">afterCompletion</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 完成处理</span><br>        System.out.println(<span class="hljs-string">&quot;Interceptor is called after view rendering&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> org.springframework.web.servlet.config.annotation.InterceptorRegistry;<br><span class="hljs-keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WebConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">WebMvcConfigurer</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> &#123;<br>        registry.addInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyInterceptor</span>()).addPathPatterns(<span class="hljs-string">&quot;/**&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-使用场景"><a href="#2-3-使用场景" class="headerlink" title="2.3 使用场景"></a>2.3 使用场景</h2><ul>
+<li><strong>过滤器（Filter）</strong>：<ul>
+<li>适合于所有Web应用，不局限于某个框架。</li>
+<li>适用于处理通用的请求和响应，比如请求日志记录、设置字符编码、实现跨域访问、过滤敏感词等。</li>
+</ul>
+</li>
+<li><strong>拦截器（Interceptor）</strong>：<ul>
+<li>依赖于具体的Web框架，如Spring MVC。</li>
+<li>适用于处理与业务逻辑相关的功能，比如权限验证、用户认证、记录业务操作日志等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-生命周期"><a href="#2-4-生命周期" class="headerlink" title="2.4 生命周期"></a>2.4 生命周期</h2><ul>
+<li><strong>过滤器（Filter）</strong>：<ul>
+<li>生命周期由Servlet容器管理，随着Web应用的启动和停止而初始化和销毁。</li>
+</ul>
+</li>
+<li><strong>拦截器（Interceptor）</strong>：<ul>
+<li>生命周期由Web框架管理，随着应用上下文的创建和销毁而初始化和销毁。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-5-作用范围"><a href="#2-5-作用范围" class="headerlink" title="2.5 作用范围"></a>2.5 作用范围</h2><ul>
+<li><p><strong>过滤器（Filter）</strong>：</p>
+<ul>
+<li>可以作用于所有的请求，包括静态资源的请求。</li>
+</ul>
+</li>
+<li><p><strong>拦截器（Interceptor）</strong>：</p>
+<ul>
+<li>主要作用于处理器（Controller）方法调用之前和之后，不会拦截静态资源的请求。</li>
+</ul>
+</li>
 </ul>
 
                 

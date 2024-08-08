@@ -61,7 +61,7 @@
 <meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/f7075de1998a431291f174623edb3a0d.jpeg">
 <meta property="og:image" content="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/ca6ad37bfc804680ad739ca559611956.jpeg">
 <meta property="article:published_time" content="2024-05-02T02:38:19.000Z">
-<meta property="article:modified_time" content="2024-05-02T14:47:01.190Z">
+<meta property="article:modified_time" content="2024-08-08T10:51:12.883Z">
 <meta property="article:author" content="Lai Baijiang">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary_large_image">
@@ -260,7 +260,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.9k 字
+          9.1k 字
         
       </span>
     
@@ -483,7 +483,10 @@
 <p>如果使用redis作为分布式锁，使用setnx就可以完成，当然最后一定要手动的删除锁。</p>
 <p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240502121322214.png" srcset="/img/loading.gif" lazyload alt="image-20240502121322214"></p>
 <h2 id="2-2-锁时长"><a href="#2-2-锁时长" class="headerlink" title="2.2 锁时长"></a>2.2 锁时长</h2><h3 id="2-2-1-预估"><a href="#2-2-1-预估" class="headerlink" title="2.2.1 预估"></a>2.2.1 预估</h3><p>根据业务的平时耗时来给出一个预估加锁时长，但是如果出现网络抖动或者IO异常时，此方法不可靠。</p>
-<h3 id="2-2-2-看门狗"><a href="#2-2-2-看门狗" class="headerlink" title="2.2.2 看门狗"></a>2.2.2 看门狗</h3><p>当线程1需要进行加锁时，获取锁成功后，每个</p>
+<h3 id="2-2-2-看门狗"><a href="#2-2-2-看门狗" class="headerlink" title="2.2.2 看门狗"></a>2.2.2 看门狗</h3><p>只要线程一加锁成功，就会启动一个<code>watch dog</code>看门狗，它是一个后台线程，会每隔<code>10</code>秒检查一下，如果线程一还持有锁，那么就会不断的延长锁<code>key</code>的生存时间。因此，<code>Redisson</code>就是使用<code>Redisson</code>解决了锁过期释放，业务没执行完问题。</p>
+<blockquote>
+<p>1、如果我们指定了锁的超时时间，就发送给Redis执行脚本，进行占锁，默认超时就是我们制定的时间，不会自动续期；<br>2、如果我们未指定锁的超时时间，就使用 <code>lockWatchdogTimeout = 30 * 1000</code> 【看门狗默认时间】 </p>
+</blockquote>
 <h2 id="2-3-可重入"><a href="#2-3-可重入" class="headerlink" title="2.3 可重入"></a>2.3 可重入</h2><p>redission实现的分布式锁是可重入的，使用Hash结构记录线程Id和重入次数</p>
 <p><img src="https://mypc-1313021454.cos.ap-beijing.myqcloud.com/interview/image-20240502122445085.png" srcset="/img/loading.gif" lazyload alt="image-20240502122445085"></p>
 <h2 id="2-4-主从一致"><a href="#2-4-主从一致" class="headerlink" title="2.4 主从一致"></a>2.4 主从一致</h2><p>即：当线程1获得锁操作master节点后，master发生了宕机，此时在从节点中选举出新的master节点，线程2获取锁在新的master上，这样就造成两个线程同时获得锁</p>
